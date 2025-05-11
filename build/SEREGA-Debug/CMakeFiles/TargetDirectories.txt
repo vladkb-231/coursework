@@ -1,0 +1,9 @@
+C:/Users/drego/Documents/volleyball/build/SEREGA-Debug/CMakeFiles/volleyball.dir
+C:/Users/drego/Documents/volleyball/build/SEREGA-Debug/CMakeFiles/edit_cache.dir
+C:/Users/drego/Documents/volleyball/build/SEREGA-Debug/CMakeFiles/rebuild_cache.dir
+C:/Users/drego/Documents/volleyball/build/SEREGA-Debug/CMakeFiles/list_install_components.dir
+C:/Users/drego/Documents/volleyball/build/SEREGA-Debug/CMakeFiles/install.dir
+C:/Users/drego/Documents/volleyball/build/SEREGA-Debug/CMakeFiles/install/local.dir
+C:/Users/drego/Documents/volleyball/build/SEREGA-Debug/CMakeFiles/install/strip.dir
+C:/Users/drego/Documents/volleyball/build/SEREGA-Debug/CMakeFiles/volleyball_autogen_timestamp_deps.dir
+C:/Users/drego/Documents/volleyball/build/SEREGA-Debug/CMakeFiles/volleyball_autogen.dir

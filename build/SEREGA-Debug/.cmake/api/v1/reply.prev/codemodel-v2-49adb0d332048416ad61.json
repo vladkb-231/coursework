@@ -1,0 +1,79 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Debug-853470d933fbaedf0037.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "volleyball",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "volleyball::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-volleyball-Debug-4191576c2e0396975ab2.json",
+					"name" : "volleyball",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "volleyball_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-volleyball_autogen-Debug-e0c3c239478b3f8a3670.json",
+					"name" : "volleyball_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "volleyball_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-volleyball_autogen_timestamp_deps-Debug-9848d07478e256aa3148.json",
+					"name" : "volleyball_autogen_timestamp_deps",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "C:/Users/drego/Documents/volleyball/build/SEREGA-Debug",
+		"source" : "C:/Users/drego/Documents/volleyball"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 7
+	}
+}
