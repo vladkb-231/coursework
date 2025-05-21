@@ -5,4 +5,3 @@
 #include "NLOY5YBGEN/moc_team.cpp"
 #include "NLOY5YBGEN/moc_tournament.cpp"
 #include "NLOY5YBGEN/moc_tournamenttable.cpp"
-#include "UWAWGWCNXF/moc_basicsimulation.cpp"

@@ -302,7 +302,4 @@ CMakeFiles/volleyball.dir/model/player.cpp.obj: \
  D:/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/ratio \
  D:/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/ctime \
  D:/QT/Tools/mingw_64_2/include/QtCore/QString \
- D:/QT/Tools/mingw_64_2/include/QtCore/qstring.h \
- C:\Users\drego\Documents\volleyball\model\team.h \
- D:/QT/Tools/mingw_64_2/include/QtCore/QList \
- D:/QT/Tools/mingw_64_2/include/QtCore/qlist.h
+ D:/QT/Tools/mingw_64_2/include/QtCore/qstring.h

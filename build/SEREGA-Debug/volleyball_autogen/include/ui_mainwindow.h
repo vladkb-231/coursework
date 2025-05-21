@@ -11,8 +11,9 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QComboBox>
+#include <QtWidgets/QFormLayout>
 #include <QtWidgets/QHBoxLayout>
-#include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QListWidget>
@@ -22,8 +23,6 @@
 #include <QtWidgets/QSpinBox>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTabWidget>
-#include <QtWidgets/QTableWidget>
-#include <QtWidgets/QTextEdit>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
@@ -33,31 +32,34 @@ class Ui_MainWindow
 {
 public:
     QWidget *centralwidget;
-    QVBoxLayout *verticalLayoutMain;
+    QHBoxLayout *horizontalLayout;
     QTabWidget *tabWidget;
-    QWidget *tabTeam;
-    QVBoxLayout *verticalLayoutTeam;
-    QHBoxLayout *horizontalLayoutPlayerInput;
-    QLineEdit *playerNameEdit;
-    QSpinBox *speedSpinBox;
-    QSpinBox *attackSpinBox;
-    QSpinBox *staminaSpinBox;
-    QPushButton *addPlayerButton;
-    QListWidget *playersListWidget;
-    QHBoxLayout *horizontalLayoutTeamNameCreate;
+    QWidget *teamTab;
+    QVBoxLayout *verticalLayout;
     QLineEdit *teamNameEdit;
-    QPushButton *createTeamButton;
-    QListWidget *teamsListWidget;
-    QWidget *tabTournament;
-    QVBoxLayout *verticalLayoutTournament;
-    QPushButton *createTournamentButton;
-    QListWidget *scheduleListWidget;
-    QHBoxLayout *horizontalLayoutTournamentControls;
-    QPushButton *startTournamentButton;
-    QLabel *currentMatchLabel;
-    QLabel *scoreLabel;
-    QTextEdit *matchLogTextEdit;
-    QTableWidget *tournamentTableWidget;
+    QFormLayout *formLayout;
+    QLabel *label;
+    QLineEdit *playerNameEdit;
+    QLabel *label_2;
+    QSpinBox *speedSpin;
+    QLabel *label_3;
+    QSpinBox *attackSpin;
+    QLabel *label_4;
+    QSpinBox *staminaSpin;
+    QPushButton *addPlayerBtn;
+    QListWidget *playersList;
+    QPushButton *createTeamBtn;
+    QListWidget *teamsList;
+    QWidget *simulationTab;
+    QVBoxLayout *verticalLayout_2;
+    QHBoxLayout *horizontalLayout_2;
+    QLabel *label_5;
+    QComboBox *team1Combo;
+    QLabel *label_6;
+    QComboBox *team2Combo;
+    QLabel *lblScore;
+    QPushButton *simulateBtn;
+    QListWidget *eventsLog;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -65,146 +67,147 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName("MainWindow");
-        MainWindow->resize(800, 700);
+        MainWindow->resize(800, 600);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName("centralwidget");
-        verticalLayoutMain = new QVBoxLayout(centralwidget);
-        verticalLayoutMain->setObjectName("verticalLayoutMain");
+        horizontalLayout = new QHBoxLayout(centralwidget);
+        horizontalLayout->setObjectName("horizontalLayout");
         tabWidget = new QTabWidget(centralwidget);
         tabWidget->setObjectName("tabWidget");
-        tabTeam = new QWidget();
-        tabTeam->setObjectName("tabTeam");
-        verticalLayoutTeam = new QVBoxLayout(tabTeam);
-        verticalLayoutTeam->setObjectName("verticalLayoutTeam");
-        horizontalLayoutPlayerInput = new QHBoxLayout();
-        horizontalLayoutPlayerInput->setObjectName("horizontalLayoutPlayerInput");
-        playerNameEdit = new QLineEdit(tabTeam);
-        playerNameEdit->setObjectName("playerNameEdit");
-
-        horizontalLayoutPlayerInput->addWidget(playerNameEdit);
-
-        speedSpinBox = new QSpinBox(tabTeam);
-        speedSpinBox->setObjectName("speedSpinBox");
-        speedSpinBox->setMinimum(1);
-        speedSpinBox->setMaximum(100);
-        speedSpinBox->setValue(50);
-
-        horizontalLayoutPlayerInput->addWidget(speedSpinBox);
-
-        attackSpinBox = new QSpinBox(tabTeam);
-        attackSpinBox->setObjectName("attackSpinBox");
-        attackSpinBox->setMinimum(1);
-        attackSpinBox->setMaximum(100);
-        attackSpinBox->setValue(50);
-
-        horizontalLayoutPlayerInput->addWidget(attackSpinBox);
-
-        staminaSpinBox = new QSpinBox(tabTeam);
-        staminaSpinBox->setObjectName("staminaSpinBox");
-        staminaSpinBox->setMinimum(1);
-        staminaSpinBox->setMaximum(100);
-        staminaSpinBox->setValue(50);
-
-        horizontalLayoutPlayerInput->addWidget(staminaSpinBox);
-
-        addPlayerButton = new QPushButton(tabTeam);
-        addPlayerButton->setObjectName("addPlayerButton");
-
-        horizontalLayoutPlayerInput->addWidget(addPlayerButton);
-
-
-        verticalLayoutTeam->addLayout(horizontalLayoutPlayerInput);
-
-        playersListWidget = new QListWidget(tabTeam);
-        playersListWidget->setObjectName("playersListWidget");
-
-        verticalLayoutTeam->addWidget(playersListWidget);
-
-        horizontalLayoutTeamNameCreate = new QHBoxLayout();
-        horizontalLayoutTeamNameCreate->setObjectName("horizontalLayoutTeamNameCreate");
-        teamNameEdit = new QLineEdit(tabTeam);
+        teamTab = new QWidget();
+        teamTab->setObjectName("teamTab");
+        verticalLayout = new QVBoxLayout(teamTab);
+        verticalLayout->setObjectName("verticalLayout");
+        teamNameEdit = new QLineEdit(teamTab);
         teamNameEdit->setObjectName("teamNameEdit");
 
-        horizontalLayoutTeamNameCreate->addWidget(teamNameEdit);
+        verticalLayout->addWidget(teamNameEdit);
 
-        createTeamButton = new QPushButton(tabTeam);
-        createTeamButton->setObjectName("createTeamButton");
+        formLayout = new QFormLayout();
+        formLayout->setObjectName("formLayout");
+        label = new QLabel(teamTab);
+        label->setObjectName("label");
 
-        horizontalLayoutTeamNameCreate->addWidget(createTeamButton);
+        formLayout->setWidget(0, QFormLayout::LabelRole, label);
+
+        playerNameEdit = new QLineEdit(teamTab);
+        playerNameEdit->setObjectName("playerNameEdit");
+
+        formLayout->setWidget(0, QFormLayout::FieldRole, playerNameEdit);
+
+        label_2 = new QLabel(teamTab);
+        label_2->setObjectName("label_2");
+
+        formLayout->setWidget(1, QFormLayout::LabelRole, label_2);
+
+        speedSpin = new QSpinBox(teamTab);
+        speedSpin->setObjectName("speedSpin");
+        speedSpin->setMaximum(100);
+
+        formLayout->setWidget(1, QFormLayout::FieldRole, speedSpin);
+
+        label_3 = new QLabel(teamTab);
+        label_3->setObjectName("label_3");
+
+        formLayout->setWidget(2, QFormLayout::LabelRole, label_3);
+
+        attackSpin = new QSpinBox(teamTab);
+        attackSpin->setObjectName("attackSpin");
+        attackSpin->setMaximum(100);
+
+        formLayout->setWidget(2, QFormLayout::FieldRole, attackSpin);
+
+        label_4 = new QLabel(teamTab);
+        label_4->setObjectName("label_4");
+
+        formLayout->setWidget(3, QFormLayout::LabelRole, label_4);
+
+        staminaSpin = new QSpinBox(teamTab);
+        staminaSpin->setObjectName("staminaSpin");
+        staminaSpin->setMaximum(100);
+
+        formLayout->setWidget(3, QFormLayout::FieldRole, staminaSpin);
 
 
-        verticalLayoutTeam->addLayout(horizontalLayoutTeamNameCreate);
+        verticalLayout->addLayout(formLayout);
 
-        teamsListWidget = new QListWidget(tabTeam);
-        teamsListWidget->setObjectName("teamsListWidget");
+        addPlayerBtn = new QPushButton(teamTab);
+        addPlayerBtn->setObjectName("addPlayerBtn");
 
-        verticalLayoutTeam->addWidget(teamsListWidget);
+        verticalLayout->addWidget(addPlayerBtn);
 
-        tabWidget->addTab(tabTeam, QString());
-        tabTournament = new QWidget();
-        tabTournament->setObjectName("tabTournament");
-        verticalLayoutTournament = new QVBoxLayout(tabTournament);
-        verticalLayoutTournament->setObjectName("verticalLayoutTournament");
-        createTournamentButton = new QPushButton(tabTournament);
-        createTournamentButton->setObjectName("createTournamentButton");
+        playersList = new QListWidget(teamTab);
+        playersList->setObjectName("playersList");
 
-        verticalLayoutTournament->addWidget(createTournamentButton);
+        verticalLayout->addWidget(playersList);
 
-        scheduleListWidget = new QListWidget(tabTournament);
-        scheduleListWidget->setObjectName("scheduleListWidget");
+        createTeamBtn = new QPushButton(teamTab);
+        createTeamBtn->setObjectName("createTeamBtn");
 
-        verticalLayoutTournament->addWidget(scheduleListWidget);
+        verticalLayout->addWidget(createTeamBtn);
 
-        horizontalLayoutTournamentControls = new QHBoxLayout();
-        horizontalLayoutTournamentControls->setObjectName("horizontalLayoutTournamentControls");
-        startTournamentButton = new QPushButton(tabTournament);
-        startTournamentButton->setObjectName("startTournamentButton");
+        teamsList = new QListWidget(teamTab);
+        teamsList->setObjectName("teamsList");
 
-        horizontalLayoutTournamentControls->addWidget(startTournamentButton);
+        verticalLayout->addWidget(teamsList);
 
-        currentMatchLabel = new QLabel(tabTournament);
-        currentMatchLabel->setObjectName("currentMatchLabel");
+        tabWidget->addTab(teamTab, QString());
+        simulationTab = new QWidget();
+        simulationTab->setObjectName("simulationTab");
+        verticalLayout_2 = new QVBoxLayout(simulationTab);
+        verticalLayout_2->setObjectName("verticalLayout_2");
+        horizontalLayout_2 = new QHBoxLayout();
+        horizontalLayout_2->setObjectName("horizontalLayout_2");
+        label_5 = new QLabel(simulationTab);
+        label_5->setObjectName("label_5");
 
-        horizontalLayoutTournamentControls->addWidget(currentMatchLabel);
+        horizontalLayout_2->addWidget(label_5);
 
-        scoreLabel = new QLabel(tabTournament);
-        scoreLabel->setObjectName("scoreLabel");
+        team1Combo = new QComboBox(simulationTab);
+        team1Combo->setObjectName("team1Combo");
 
-        horizontalLayoutTournamentControls->addWidget(scoreLabel);
+        horizontalLayout_2->addWidget(team1Combo);
+
+        label_6 = new QLabel(simulationTab);
+        label_6->setObjectName("label_6");
+
+        horizontalLayout_2->addWidget(label_6);
+
+        team2Combo = new QComboBox(simulationTab);
+        team2Combo->setObjectName("team2Combo");
+
+        horizontalLayout_2->addWidget(team2Combo);
 
 
-        verticalLayoutTournament->addLayout(horizontalLayoutTournamentControls);
+        verticalLayout_2->addLayout(horizontalLayout_2);
 
-        matchLogTextEdit = new QTextEdit(tabTournament);
-        matchLogTextEdit->setObjectName("matchLogTextEdit");
-        matchLogTextEdit->setReadOnly(true);
+        lblScore = new QLabel(simulationTab);
+        lblScore->setObjectName("lblScore");
+        lblScore->setAlignment(Qt::AlignCenter);
+        lblScore->setStyleSheet(QString::fromUtf8("font-size: 18px; font-weight: bold; color: #2c3e50;"));
 
-        verticalLayoutTournament->addWidget(matchLogTextEdit);
+        verticalLayout_2->addWidget(lblScore);
 
-        tournamentTableWidget = new QTableWidget(tabTournament);
-        if (tournamentTableWidget->columnCount() < 4)
-            tournamentTableWidget->setColumnCount(4);
-        QTableWidgetItem *__qtablewidgetitem = new QTableWidgetItem();
-        tournamentTableWidget->setHorizontalHeaderItem(0, __qtablewidgetitem);
-        QTableWidgetItem *__qtablewidgetitem1 = new QTableWidgetItem();
-        tournamentTableWidget->setHorizontalHeaderItem(1, __qtablewidgetitem1);
-        QTableWidgetItem *__qtablewidgetitem2 = new QTableWidgetItem();
-        tournamentTableWidget->setHorizontalHeaderItem(2, __qtablewidgetitem2);
-        QTableWidgetItem *__qtablewidgetitem3 = new QTableWidgetItem();
-        tournamentTableWidget->setHorizontalHeaderItem(3, __qtablewidgetitem3);
-        tournamentTableWidget->setObjectName("tournamentTableWidget");
-        tournamentTableWidget->setColumnCount(4);
-        tournamentTableWidget->setRowCount(0);
+        simulateBtn = new QPushButton(simulationTab);
+        simulateBtn->setObjectName("simulateBtn");
+        simulateBtn->setStyleSheet(QString::fromUtf8("padding: 10px; font-weight: bold;"));
 
-        verticalLayoutTournament->addWidget(tournamentTableWidget);
+        verticalLayout_2->addWidget(simulateBtn);
 
-        tabWidget->addTab(tabTournament, QString());
+        eventsLog = new QListWidget(simulationTab);
+        eventsLog->setObjectName("eventsLog");
+        eventsLog->setStyleSheet(QString::fromUtf8("font-family: monospace; font-size: 12px;"));
 
-        verticalLayoutMain->addWidget(tabWidget);
+        verticalLayout_2->addWidget(eventsLog);
+
+        tabWidget->addTab(simulationTab, QString());
+
+        horizontalLayout->addWidget(tabWidget);
 
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");
+        menubar->setGeometry(QRect(0, 0, 800, 21));
         MainWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName("statusbar");
@@ -217,28 +220,20 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "\320\241\320\270\320\274\321\203\320\273\321\217\321\206\320\270\321\217 \321\202\321\203\321\200\320\275\320\270\321\200\320\260", nullptr));
-        playerNameEdit->setPlaceholderText(QCoreApplication::translate("MainWindow", "\320\230\320\274\321\217 \320\270\320\263\321\200\320\276\320\272\320\260", nullptr));
-        speedSpinBox->setPrefix(QCoreApplication::translate("MainWindow", "\320\241\320\272\320\276\321\200\320\276\321\201\321\202\321\214: ", nullptr));
-        attackSpinBox->setPrefix(QCoreApplication::translate("MainWindow", "\320\220\321\202\320\260\320\272\320\260: ", nullptr));
-        staminaSpinBox->setPrefix(QCoreApplication::translate("MainWindow", "\320\222\321\213\320\275\320\276\321\201\320\273\320\270\320\262\320\276\321\201\321\202\321\214: ", nullptr));
-        addPlayerButton->setText(QCoreApplication::translate("MainWindow", "\320\224\320\276\320\261\320\260\320\262\320\270\321\202\321\214 \320\270\320\263\321\200\320\276\320\272\320\260", nullptr));
-        teamNameEdit->setPlaceholderText(QCoreApplication::translate("MainWindow", "\320\230\320\274\321\217 \320\272\320\276\320\274\320\260\320\275\320\264\321\213", nullptr));
-        createTeamButton->setText(QCoreApplication::translate("MainWindow", "\320\241\320\276\320\267\320\264\320\260\321\202\321\214 \320\272\320\276\320\274\320\260\320\275\320\264\321\203", nullptr));
-        tabWidget->setTabText(tabWidget->indexOf(tabTeam), QCoreApplication::translate("MainWindow", "\320\244\320\276\321\200\320\274\320\270\321\200\320\276\320\262\320\260\320\275\320\270\320\265 \320\272\320\276\320\274\320\260\320\275\320\264\321\213", nullptr));
-        createTournamentButton->setText(QCoreApplication::translate("MainWindow", "\320\241\320\276\320\267\320\264\320\260\321\202\321\214 \321\202\321\203\321\200\320\275\320\270\321\200", nullptr));
-        startTournamentButton->setText(QCoreApplication::translate("MainWindow", "\320\235\320\260\321\207\320\260\321\202\321\214 \321\202\321\203\321\200\320\275\320\270\321\200", nullptr));
-        currentMatchLabel->setText(QCoreApplication::translate("MainWindow", "\320\234\320\260\321\202\321\207: -", nullptr));
-        scoreLabel->setText(QCoreApplication::translate("MainWindow", "0 : 0", nullptr));
-        QTableWidgetItem *___qtablewidgetitem = tournamentTableWidget->horizontalHeaderItem(0);
-        ___qtablewidgetitem->setText(QCoreApplication::translate("MainWindow", "\320\232\320\276\320\274\320\260\320\275\320\264\320\260", nullptr));
-        QTableWidgetItem *___qtablewidgetitem1 = tournamentTableWidget->horizontalHeaderItem(1);
-        ___qtablewidgetitem1->setText(QCoreApplication::translate("MainWindow", "\320\236\321\207\320\272\320\270", nullptr));
-        QTableWidgetItem *___qtablewidgetitem2 = tournamentTableWidget->horizontalHeaderItem(2);
-        ___qtablewidgetitem2->setText(QCoreApplication::translate("MainWindow", "\320\237\320\276\320\261\320\265\320\264\321\213", nullptr));
-        QTableWidgetItem *___qtablewidgetitem3 = tournamentTableWidget->horizontalHeaderItem(3);
-        ___qtablewidgetitem3->setText(QCoreApplication::translate("MainWindow", "\320\237\320\276\321\200\320\260\320\266\320\265\320\275\320\270\321\217", nullptr));
-        tabWidget->setTabText(tabWidget->indexOf(tabTournament), QCoreApplication::translate("MainWindow", "\320\242\321\203\321\200\320\275\320\270\321\200", nullptr));
+        MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "Volleyball Simulator", nullptr));
+        teamNameEdit->setPlaceholderText(QCoreApplication::translate("MainWindow", "Team name", nullptr));
+        label->setText(QCoreApplication::translate("MainWindow", "Player Name:", nullptr));
+        label_2->setText(QCoreApplication::translate("MainWindow", "Speed:", nullptr));
+        label_3->setText(QCoreApplication::translate("MainWindow", "Attack:", nullptr));
+        label_4->setText(QCoreApplication::translate("MainWindow", "Stamina:", nullptr));
+        addPlayerBtn->setText(QCoreApplication::translate("MainWindow", "Add Player", nullptr));
+        createTeamBtn->setText(QCoreApplication::translate("MainWindow", "Create Team", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(teamTab), QCoreApplication::translate("MainWindow", "Teams", nullptr));
+        label_5->setText(QCoreApplication::translate("MainWindow", "Team 1:", nullptr));
+        label_6->setText(QCoreApplication::translate("MainWindow", "Team 2:", nullptr));
+        lblScore->setText(QCoreApplication::translate("MainWindow", "Score: 0 - 0", nullptr));
+        simulateBtn->setText(QCoreApplication::translate("MainWindow", "Simulate Match", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(simulationTab), QCoreApplication::translate("MainWindow", "Simulation", nullptr));
     } // retranslateUi
 
 };

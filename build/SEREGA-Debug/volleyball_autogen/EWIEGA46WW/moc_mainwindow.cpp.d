@@ -2,12 +2,8 @@ C:/Users/drego/Documents/volleyball/build/SEREGA-Debug/volleyball_autogen/EWIEGA
   C:/Users/drego/Documents/volleyball/build/SEREGA-Debug/volleyball_autogen/moc_predefs.h \
   C:/Users/drego/Documents/volleyball/model/gamerules.h \
   C:/Users/drego/Documents/volleyball/model/match.h \
-  C:/Users/drego/Documents/volleyball/model/matchevent.h \
   C:/Users/drego/Documents/volleyball/model/player.h \
   C:/Users/drego/Documents/volleyball/model/team.h \
-  C:/Users/drego/Documents/volleyball/model/tournament.h \
-  C:/Users/drego/Documents/volleyball/model/tournamenttable.h \
-  C:/Users/drego/Documents/volleyball/simulation/basicsimulation.h \
   D:/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed/limits.h \
   D:/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed/syslimits.h \
   D:/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/algorithm \
@@ -22,6 +18,7 @@ C:/Users/drego/Documents/volleyball/build/SEREGA-Debug/volleyball_autogen/EWIEGA
   D:/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/allocated_ptr.h \
   D:/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/allocator.h \
   D:/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/atomic_base.h \
+  D:/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/atomic_futex.h \
   D:/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/atomic_lockfree_defines.h \
   D:/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/basic_string.h \
   D:/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/basic_string.tcc \
@@ -64,6 +61,8 @@ C:/Users/drego/Documents/volleyball/build/SEREGA-Debug/volleyball_autogen/EWIEGA
   D:/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/specfun.h \
   D:/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/std_abs.h \
   D:/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/std_function.h \
+  D:/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/std_mutex.h \
+  D:/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/std_thread.h \
   D:/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/stl_algo.h \
   D:/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/stl_algobase.h \
   D:/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/stl_bvector.h \
@@ -90,6 +89,7 @@ C:/Users/drego/Documents/volleyball/build/SEREGA-Debug/volleyball_autogen/EWIEGA
   D:/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/string_view.tcc \
   D:/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/stringfwd.h \
   D:/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/uniform_int_dist.h \
+  D:/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/unique_lock.h \
   D:/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/unique_ptr.h \
   D:/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/unordered_map.h \
   D:/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/uses_allocator.h \
@@ -99,6 +99,7 @@ C:/Users/drego/Documents/volleyball/build/SEREGA-Debug/volleyball_autogen/EWIEGA
   D:/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/chrono \
   D:/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/clocale \
   D:/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/cmath \
+  D:/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/condition_variable \
   D:/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/cstddef \
   D:/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/cstdint \
   D:/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/cstdio \
@@ -118,6 +119,7 @@ C:/Users/drego/Documents/volleyball/build/SEREGA-Debug/volleyball_autogen/EWIEGA
   D:/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/ext/string_conversions.h \
   D:/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/ext/type_traits.h \
   D:/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/functional \
+  D:/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/future \
   D:/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/initializer_list \
   D:/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/iosfwd \
   D:/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/iterator \
@@ -125,6 +127,7 @@ C:/Users/drego/Documents/volleyball/build/SEREGA-Debug/volleyball_autogen/EWIEGA
   D:/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/list \
   D:/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/map \
   D:/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/memory \
+  D:/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/mutex \
   D:/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/new \
   D:/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/numeric \
   D:/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/optional \
@@ -206,11 +209,13 @@ C:/Users/drego/Documents/volleyball/build/SEREGA-Debug/volleyball_autogen/EWIEGA
   D:/QT/Tools/mingw1120_64/x86_64-w64-mingw32/include/time.h \
   D:/QT/Tools/mingw1120_64/x86_64-w64-mingw32/include/vadefs.h \
   D:/QT/Tools/mingw1120_64/x86_64-w64-mingw32/include/wchar.h \
+  D:/QT/Tools/mingw_64_2/include/QtCore/QDateTime \
+  D:/QT/Tools/mingw_64_2/include/QtCore/QFutureWatcher \
   D:/QT/Tools/mingw_64_2/include/QtCore/QList \
   D:/QT/Tools/mingw_64_2/include/QtCore/QMap \
+  D:/QT/Tools/mingw_64_2/include/QtCore/QMutex \
   D:/QT/Tools/mingw_64_2/include/QtCore/QObject \
   D:/QT/Tools/mingw_64_2/include/QtCore/QString \
-  D:/QT/Tools/mingw_64_2/include/QtCore/QTimer \
   D:/QT/Tools/mingw_64_2/include/QtCore/q20memory.h \
   D:/QT/Tools/mingw_64_2/include/QtCore/q20type_traits.h \
   D:/QT/Tools/mingw_64_2/include/QtCore/qalgorithms.h \
@@ -222,12 +227,12 @@ C:/Users/drego/Documents/volleyball/build/SEREGA-Debug/volleyball_autogen/EWIEGA
   D:/QT/Tools/mingw_64_2/include/QtCore/qatomic.h \
   D:/QT/Tools/mingw_64_2/include/QtCore/qatomic_cxx11.h \
   D:/QT/Tools/mingw_64_2/include/QtCore/qbasicatomic.h \
-  D:/QT/Tools/mingw_64_2/include/QtCore/qbasictimer.h \
   D:/QT/Tools/mingw_64_2/include/QtCore/qbindingstorage.h \
   D:/QT/Tools/mingw_64_2/include/QtCore/qbytearray.h \
   D:/QT/Tools/mingw_64_2/include/QtCore/qbytearrayalgorithms.h \
   D:/QT/Tools/mingw_64_2/include/QtCore/qbytearraylist.h \
   D:/QT/Tools/mingw_64_2/include/QtCore/qbytearrayview.h \
+  D:/QT/Tools/mingw_64_2/include/QtCore/qcalendar.h \
   D:/QT/Tools/mingw_64_2/include/QtCore/qchar.h \
   D:/QT/Tools/mingw_64_2/include/QtCore/qcompare.h \
   D:/QT/Tools/mingw_64_2/include/QtCore/qcompare_impl.h \
@@ -240,12 +245,20 @@ C:/Users/drego/Documents/volleyball/build/SEREGA-Debug/volleyball_autogen/EWIEGA
   D:/QT/Tools/mingw_64_2/include/QtCore/qcontiguouscache.h \
   D:/QT/Tools/mingw_64_2/include/QtCore/qdarwinhelpers.h \
   D:/QT/Tools/mingw_64_2/include/QtCore/qdatastream.h \
+  D:/QT/Tools/mingw_64_2/include/QtCore/qdatetime.h \
+  D:/QT/Tools/mingw_64_2/include/QtCore/qdeadlinetimer.h \
   D:/QT/Tools/mingw_64_2/include/QtCore/qdebug.h \
+  D:/QT/Tools/mingw_64_2/include/QtCore/qelapsedtimer.h \
+  D:/QT/Tools/mingw_64_2/include/QtCore/qexception.h \
   D:/QT/Tools/mingw_64_2/include/QtCore/qexceptionhandling.h \
   D:/QT/Tools/mingw_64_2/include/QtCore/qflags.h \
   D:/QT/Tools/mingw_64_2/include/QtCore/qfloat16.h \
   D:/QT/Tools/mingw_64_2/include/QtCore/qforeach.h \
   D:/QT/Tools/mingw_64_2/include/QtCore/qfunctionpointer.h \
+  D:/QT/Tools/mingw_64_2/include/QtCore/qfuture.h \
+  D:/QT/Tools/mingw_64_2/include/QtCore/qfuture_impl.h \
+  D:/QT/Tools/mingw_64_2/include/QtCore/qfutureinterface.h \
+  D:/QT/Tools/mingw_64_2/include/QtCore/qfuturewatcher.h \
   D:/QT/Tools/mingw_64_2/include/QtCore/qgenericatomic.h \
   D:/QT/Tools/mingw_64_2/include/QtCore/qglobal.h \
   D:/QT/Tools/mingw_64_2/include/QtCore/qglobalstatic.h \
@@ -256,6 +269,7 @@ C:/Users/drego/Documents/volleyball/build/SEREGA-Debug/volleyball_autogen/EWIEGA
   D:/QT/Tools/mingw_64_2/include/QtCore/qiterator.h \
   D:/QT/Tools/mingw_64_2/include/QtCore/qline.h \
   D:/QT/Tools/mingw_64_2/include/QtCore/qlist.h \
+  D:/QT/Tools/mingw_64_2/include/QtCore/qlocale.h \
   D:/QT/Tools/mingw_64_2/include/QtCore/qlogging.h \
   D:/QT/Tools/mingw_64_2/include/QtCore/qmalloc.h \
   D:/QT/Tools/mingw_64_2/include/QtCore/qmap.h \
@@ -264,6 +278,7 @@ C:/Users/drego/Documents/volleyball/build/SEREGA-Debug/volleyball_autogen/EWIEGA
   D:/QT/Tools/mingw_64_2/include/QtCore/qmetacontainer.h \
   D:/QT/Tools/mingw_64_2/include/QtCore/qmetatype.h \
   D:/QT/Tools/mingw_64_2/include/QtCore/qminmax.h \
+  D:/QT/Tools/mingw_64_2/include/QtCore/qmutex.h \
   D:/QT/Tools/mingw_64_2/include/QtCore/qnamespace.h \
   D:/QT/Tools/mingw_64_2/include/QtCore/qnumeric.h \
   D:/QT/Tools/mingw_64_2/include/QtCore/qobject.h \
@@ -273,9 +288,13 @@ C:/Users/drego/Documents/volleyball/build/SEREGA-Debug/volleyball_autogen/EWIEGA
   D:/QT/Tools/mingw_64_2/include/QtCore/qoverload.h \
   D:/QT/Tools/mingw_64_2/include/QtCore/qpair.h \
   D:/QT/Tools/mingw_64_2/include/QtCore/qpoint.h \
+  D:/QT/Tools/mingw_64_2/include/QtCore/qpointer.h \
   D:/QT/Tools/mingw_64_2/include/QtCore/qprocessordetection.h \
+  D:/QT/Tools/mingw_64_2/include/QtCore/qpromise.h \
   D:/QT/Tools/mingw_64_2/include/QtCore/qrect.h \
   D:/QT/Tools/mingw_64_2/include/QtCore/qrefcount.h \
+  D:/QT/Tools/mingw_64_2/include/QtCore/qresultstore.h \
+  D:/QT/Tools/mingw_64_2/include/QtCore/qrunnable.h \
   D:/QT/Tools/mingw_64_2/include/QtCore/qscopedpointer.h \
   D:/QT/Tools/mingw_64_2/include/QtCore/qscopeguard.h \
   D:/QT/Tools/mingw_64_2/include/QtCore/qset.h \
@@ -305,11 +324,13 @@ C:/Users/drego/Documents/volleyball/build/SEREGA-Debug/volleyball_autogen/EWIEGA
   D:/QT/Tools/mingw_64_2/include/QtCore/qtdeprecationmarkers.h \
   D:/QT/Tools/mingw_64_2/include/QtCore/qtenvironmentvariables.h \
   D:/QT/Tools/mingw_64_2/include/QtCore/qtextstream.h \
-  D:/QT/Tools/mingw_64_2/include/QtCore/qtimer.h \
+  D:/QT/Tools/mingw_64_2/include/QtCore/qthread.h \
+  D:/QT/Tools/mingw_64_2/include/QtCore/qthreadpool.h \
   D:/QT/Tools/mingw_64_2/include/QtCore/qtmetamacros.h \
   D:/QT/Tools/mingw_64_2/include/QtCore/qtnoop.h \
   D:/QT/Tools/mingw_64_2/include/QtCore/qtpreprocessorsupport.h \
   D:/QT/Tools/mingw_64_2/include/QtCore/qtresource.h \
+  D:/QT/Tools/mingw_64_2/include/QtCore/qtsan_impl.h \
   D:/QT/Tools/mingw_64_2/include/QtCore/qttranslation.h \
   D:/QT/Tools/mingw_64_2/include/QtCore/qttypetraits.h \
   D:/QT/Tools/mingw_64_2/include/QtCore/qtversion.h \

@@ -1,5 +1,6 @@
 C:/Users/drego/Documents/volleyball/build/SEREGA-Debug/volleyball_autogen/NLOY5YBGEN/moc_team.cpp: C:/Users/drego/Documents/volleyball/model/team.h \
   C:/Users/drego/Documents/volleyball/build/SEREGA-Debug/volleyball_autogen/moc_predefs.h \
+  C:/Users/drego/Documents/volleyball/model/player.h \
   D:/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed/limits.h \
   D:/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed/syslimits.h \
   D:/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/algorithm \

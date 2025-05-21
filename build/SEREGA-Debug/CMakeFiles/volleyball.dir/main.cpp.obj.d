@@ -352,28 +352,47 @@ CMakeFiles/volleyball.dir/main.cpp.obj: \
  D:/QT/Tools/mingw_64_2/include/QtGui/qcursor.h \
  D:/QT/Tools/mingw_64_2/include/QtGui/qbitmap.h \
  D:/QT/Tools/mingw_64_2/include/QtWidgets/qtabwidget.h \
- D:/QT/Tools/mingw_64_2/include/QtCore/QList \
- D:/QT/Tools/mingw_64_2/include/QtCore/qlist.h \
- C:\Users\drego\Documents\volleyball\model\player.h \
+ D:/QT/Tools/mingw_64_2/include/QtCore/QFutureWatcher \
+ D:/QT/Tools/mingw_64_2/include/QtCore/qfuturewatcher.h \
+ D:/QT/Tools/mingw_64_2/include/QtCore/qfuture.h \
+ D:/QT/Tools/mingw_64_2/include/QtCore/qfutureinterface.h \
+ D:/QT/Tools/mingw_64_2/include/QtCore/qmutex.h \
+ D:/QT/Tools/mingw_64_2/include/QtCore/qtsan_impl.h \
+ D:/QT/Tools/mingw_64_2/include/QtCore/qresultstore.h \
+ D:/QT/Tools/mingw_64_2/include/QtCore/qfuture_impl.h \
+ D:/QT/Tools/mingw_64_2/include/QtCore/qthreadpool.h \
+ D:/QT/Tools/mingw_64_2/include/QtCore/qthread.h \
+ D:/QT/Tools/mingw_64_2/include/QtCore/qdeadlinetimer.h \
+ D:/QT/Tools/mingw_64_2/include/QtCore/qelapsedtimer.h \
+ D:/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/future \
+ D:/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/mutex \
+ D:/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/std_mutex.h \
+ D:/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/unique_lock.h \
+ D:/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/condition_variable \
+ D:/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/atomic_futex.h \
+ D:/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/std_thread.h \
+ D:/QT/Tools/mingw_64_2/include/QtCore/qrunnable.h \
+ D:/QT/Tools/mingw_64_2/include/QtCore/qexception.h \
+ D:/QT/Tools/mingw_64_2/include/QtCore/qpointer.h \
+ D:/QT/Tools/mingw_64_2/include/QtCore/qpromise.h \
+ C:\Users\drego\Documents\volleyball\model/match.h \
  D:/QT/Tools/mingw_64_2/include/QtCore/QObject \
  D:/QT/Tools/mingw_64_2/include/QtCore/qobject.h \
- D:/QT/Tools/mingw_64_2/include/QtCore/QString \
- D:/QT/Tools/mingw_64_2/include/QtCore/qstring.h \
- C:\Users\drego\Documents\volleyball\model\team.h \
- C:\Users\drego\Documents\volleyball\model\team.h \
- C:\Users\drego\Documents\volleyball\model\tournament.h \
- C:\Users\drego\Documents\volleyball\model\match.h \
  D:/QT/Tools/mingw_64_2/include/QtCore/QMap \
  D:/QT/Tools/mingw_64_2/include/QtCore/qmap.h \
- C:\Users\drego\Documents\volleyball\model\player.h \
- C:\Users\drego\Documents\volleyball\model\tournamenttable.h \
- C:\Users\drego\Documents\volleyball\simulation\basicsimulation.h \
- D:/QT/Tools/mingw_64_2/include/QtCore/QTimer \
- D:/QT/Tools/mingw_64_2/include/QtCore/qtimer.h \
- D:/QT/Tools/mingw_64_2/include/QtCore/qbasictimer.h \
- C:\Users\drego\Documents\volleyball\model\match.h \
- C:\Users\drego\Documents\volleyball\model\gamerules.h \
- C:\Users\drego\Documents\volleyball\model\matchevent.h \
+ D:/QT/Tools/mingw_64_2/include/QtCore/QList \
+ D:/QT/Tools/mingw_64_2/include/QtCore/qlist.h \
+ D:/QT/Tools/mingw_64_2/include/QtCore/QMutex \
+ D:/QT/Tools/mingw_64_2/include/QtCore/qmutex.h \
+ D:/QT/Tools/mingw_64_2/include/QtCore/QDateTime \
+ D:/QT/Tools/mingw_64_2/include/QtCore/qdatetime.h \
+ D:/QT/Tools/mingw_64_2/include/QtCore/qcalendar.h \
+ D:/QT/Tools/mingw_64_2/include/QtCore/qlocale.h \
+ C:\Users\drego\Documents\volleyball\model/team.h \
+ C:\Users\drego\Documents\volleyball\model/player.h \
+ D:/QT/Tools/mingw_64_2/include/QtCore/QString \
+ D:/QT/Tools/mingw_64_2/include/QtCore/qstring.h \
+ C:\Users\drego\Documents\volleyball\model/gamerules.h \
  D:/QT/Tools/mingw_64_2/include/QtWidgets/QApplication \
  D:/QT/Tools/mingw_64_2/include/QtWidgets/qapplication.h \
  D:/QT/Tools/mingw_64_2/include/QtCore/qcoreapplication.h \
@@ -383,5 +402,4 @@ CMakeFiles/volleyball.dir/main.cpp.obj: \
  D:/QT/Tools/mingw_64_2/include/QtCore/qcoreapplication_platform.h \
  D:/QT/Tools/mingw_64_2/include/QtGui/qguiapplication.h \
  D:/QT/Tools/mingw_64_2/include/QtGui/qinputmethod.h \
- D:/QT/Tools/mingw_64_2/include/QtCore/qlocale.h \
  D:/QT/Tools/mingw_64_2/include/QtGui/qguiapplication_platform.h

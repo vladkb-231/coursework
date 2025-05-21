@@ -1,84 +1,71 @@
 #include "basicsimulation.h"
 #include <QRandomGenerator>
-#include <QDebug>
+#include <QThread>
 
-BasicSimulation::BasicSimulation(QObject* parent) : QObject(parent) {
-    connect(&m_timer, &QTimer::timeout, this, &BasicSimulation::onNextEvent);
-}
+void BasicSimulation::simulate(Match* match, const GameRules& rules) {
+    QRandomGenerator* rand = QRandomGenerator::global();
+    Team* teams[] = {match->team1(), match->team2()};
 
-void BasicSimulation::simulateStepByStep(Match* match, const GameRules& rules) {
-    if (m_timer.isActive())
-        m_timer.stop();
+    const int pointsToWin = rules.getPointsToWinSet();
 
-    m_currentMatch = match;
-    m_rules = rules;
-    m_team1Score = 0;
-    m_team2Score = 0;
+    while(true) {
+        Team* actingTeam = teams[rand->bounded(2)];
+        Team* opponentTeam = (actingTeam == teams[0]) ? teams[1] : teams[0];
 
-    emit scoreUpdated(m_team1Score, m_team2Score);
-    emit eventOccurred(QString("Матч %1 vs %2 начался").arg(match->team1()->name()).arg(match->team2()->name()));
+        MatchEvent::EventType eventType = static_cast<MatchEvent::EventType>(
+            rand->bounded(4));
 
-    m_timer.start(50); // Быстрый таймер для имитации событий
-}
+        bool success = calculateSuccess(actingTeam, opponentTeam, eventType, rand);
 
-void BasicSimulation::onNextEvent() {
-    if (!m_currentMatch) {
-        m_timer.stop();
-        return;
-    }
+        Player* player = actingTeam->players().at(
+            rand->bounded(actingTeam->players().size()));
 
-    generateNextEvent();
+        MatchEvent event(
+            eventType,
+            success,
+            QDateTime::currentMSecsSinceEpoch(),
+            player,
+            actingTeam
+            );
 
-    // Проверяем, завершился ли матч
-    if ((m_team1Score >= m_rules.pointsPerSet || m_team2Score >= m_rules.pointsPerSet) &&
-        qAbs(m_team1Score - m_team2Score) >= 2) {
+        match->addEvent(event);
 
-        m_timer.stop();
-
-        QMap<Player*, int> scores;
-
-        const QList<Player*>& players1 = m_currentMatch->team1()->players();
-        const QList<Player*>& players2 = m_currentMatch->team2()->players();
-
-        int score1 = m_team1Score;
-        int score2 = m_team2Score;
-
-        // Равномерно распределяем очки между игроками команды 1
-        for (int i = 0; i < players1.size(); ++i) {
-            int val = score1 / players1.size();
-            if (i == 0) val += score1 % players1.size();
-            scores[players1[i]] = val;
+        // Обновление счета
+        if(success) {
+            if(eventType == MatchEvent::Attack || eventType == MatchEvent::Serve) {
+                match->updateScore(actingTeam);
+            }
+        } else if(eventType == MatchEvent::Attack) {
+            match->updateScore(opponentTeam);
         }
 
-        // Равномерно распределяем очки между игроками команды 2
-        for (int i = 0; i < players2.size(); ++i) {
-            int val = score2 / players2.size();
-            if (i == 0) val += score2 % players2.size();
-            scores[players2[i]] = val;
-        }
+        // Проверка окончания сета
+        auto score = match->score();
+        if(score[teams[0]] >= pointsToWin || score[teams[1]] >= pointsToWin) break;
 
-        m_currentMatch->setScore(scores);
-
-        emit eventOccurred(QString("Матч завершён. Счёт: %1 : %2").arg(score1).arg(score2));
-        emit matchFinished(m_currentMatch);
-
-        // Сброс для следующей симуляции
-        m_currentMatch = nullptr;
-        m_team1Score = 0;
-        m_team2Score = 0;
-        return;
+        QThread::msleep(300); // Задержка для визуализации
     }
 }
 
-void BasicSimulation::generateNextEvent() {
-    bool team1Scores = QRandomGenerator::global()->bounded(2) == 0;
-    if (team1Scores) {
-        m_team1Score++;
-        emit eventOccurred(QString("Очко команды %1").arg(m_currentMatch->team1()->name()));
-    } else {
-        m_team2Score++;
-        emit eventOccurred(QString("Очко команды %1").arg(m_currentMatch->team2()->name()));
-    }
-    emit scoreUpdated(m_team1Score, m_team2Score);
-}
+// ... calculateSuccess() остается без изменений ...
 
+bool BasicSimulation::calculateSuccess(Team* acting, Team* opponent,
+                                       MatchEvent::EventType type,
+                                       QRandomGenerator* rand) {
+    int baseChance = 0;
+    switch(type) {
+    case MatchEvent::Attack:
+        baseChance = acting->attackLevel() - opponent->defenseLevel() + 50;
+        break;
+    case MatchEvent::Block:
+        baseChance = opponent->defenseLevel() - acting->attackLevel() + 40;
+        break;
+    case MatchEvent::Serve:
+        baseChance = acting->attackLevel() * 0.8;
+        break;
+    case MatchEvent::Defense:
+        baseChance = acting->defenseLevel() * 1.2 - opponent->attackLevel();
+        break;
+    }
+    return rand->bounded(100) < qBound(20, baseChance, 80);
+}

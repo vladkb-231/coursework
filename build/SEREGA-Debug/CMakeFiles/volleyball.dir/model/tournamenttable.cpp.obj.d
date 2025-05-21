@@ -305,14 +305,12 @@ CMakeFiles/volleyball.dir/model/tournamenttable.cpp.obj: \
  D:/QT/Tools/mingw_64_2/include/QtCore/qmap.h \
  D:/QT/Tools/mingw_64_2/include/QtCore/qshareddata.h \
  D:/QT/Tools/mingw_64_2/include/QtCore/qshareddata_impl.h \
- C:\Users\drego\Documents\volleyball\model\team.h \
- D:/QT/Tools/mingw_64_2/include/QtCore/QString \
- D:/QT/Tools/mingw_64_2/include/QtCore/qstring.h \
- D:/QT/Tools/mingw_64_2/include/QtCore/QList \
- D:/QT/Tools/mingw_64_2/include/QtCore/qlist.h \
  C:\Users\drego\Documents\volleyball\model\match.h \
- C:\Users\drego\Documents\volleyball\model\player.h \
- D:/QT/Tools/mingw_64_2/include/QtCore/QDebug \
+ D:/QT/Tools/mingw_64_2/include/QtCore/QDateTime \
+ D:/QT/Tools/mingw_64_2/include/QtCore/qdatetime.h \
+ D:/QT/Tools/mingw_64_2/include/QtCore/qcalendar.h \
+ D:/QT/Tools/mingw_64_2/include/QtCore/qlocale.h \
+ D:/QT/Tools/mingw_64_2/include/QtCore/qvariant.h \
  D:/QT/Tools/mingw_64_2/include/QtCore/qdebug.h \
  D:/QT/Tools/mingw_64_2/include/QtCore/qtextstream.h \
  D:/QT/Tools/mingw_64_2/include/QtCore/qstringconverter_base.h \
@@ -323,4 +321,10 @@ CMakeFiles/volleyball.dir/model/tournamenttable.cpp.obj: \
  D:/QT/Tools/mingw_64_2/include/QtCore/qset.h \
  D:/QT/Tools/mingw_64_2/include/QtCore/qhash.h \
  D:/QT/Tools/mingw_64_2/include/QtCore/qvarlengtharray.h \
- D:/QT/Tools/mingw_64_2/include/QtCore/q20memory.h
+ D:/QT/Tools/mingw_64_2/include/QtCore/q20memory.h \
+ D:/QT/Tools/mingw_64_2/include/QtCore/qobject.h \
+ D:/QT/Tools/mingw_64_2/include/QtCore/QString \
+ D:/QT/Tools/mingw_64_2/include/QtCore/qstring.h \
+ D:/QT/Tools/mingw_64_2/include/QtCore/QList \
+ D:/QT/Tools/mingw_64_2/include/QtCore/qlist.h \
+ C:\Users\drego\Documents\volleyball\model\match.h
