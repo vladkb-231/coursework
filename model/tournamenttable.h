@@ -3,31 +3,30 @@
 
 #include <QObject>
 #include <QMap>
-#include "C:\Users\drego\Documents\volleyball\model\match.h"
-
-class Team;
-class Match;
+#include "team.h"
+#include "match.h"
 
 class TournamentTable : public QObject {
     Q_OBJECT
 public:
     explicit TournamentTable(QObject* parent = nullptr);
 
-    void initializeTeams(const QList<Team*>& teams); // Добавленный метод
+    // Обновляет статистику на основе результата матча
     void updateStats(Match* match);
 
+    // Получить текущие очки, победы, поражения команд
     QMap<Team*, int> points() const;
     QMap<Team*, int> wins() const;
     QMap<Team*, int> losses() const;
 
 private:
-    void addWin(Team* team);
-    void addLoss(Team* team);
-
     QMap<Team*, int> m_points;
     QMap<Team*, int> m_wins;
     QMap<Team*, int> m_losses;
+
+    void addWin(Team* team);
+    void addLoss(Team* team);
 };
 
-
 #endif // TOURNAMENTTABLE_H
+

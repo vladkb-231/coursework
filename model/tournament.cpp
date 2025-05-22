@@ -1,5 +1,4 @@
 #include "tournament.h"
-#include "tournamenttable.h"
 
 Tournament::Tournament(QObject* parent)
     : QObject(parent), m_table(new TournamentTable(this))
@@ -12,7 +11,6 @@ Tournament::Tournament(const QString& name, QObject* parent)
 void Tournament::addTeam(Team* team) {
     if (!m_teams.contains(team)) {
         m_teams.append(team);
-        m_table->initializeTeams(m_teams); // Важная строка!
     }
 }
 

@@ -39,59 +39,71 @@ namespace {
 struct qt_meta_stringdata_CLASSMainWindowENDCLASS_t {};
 static constexpr auto qt_meta_stringdata_CLASSMainWindowENDCLASS = QtMocHelpers::stringData(
     "MainWindow",
-    "onAddPlayerClicked",
+    "on_addPlayerButton_clicked",
     "",
-    "onCreateTeamClicked",
-    "onSimulateClicked",
-    "handleNewEvent",
-    "MatchEvent",
-    "event",
-    "handleScoreChanged",
+    "on_createTeamButton_clicked",
+    "on_createTournamentButton_clicked",
+    "on_startTournamentButton_clicked",
+    "onSimulationEvent",
+    "eventDescription",
+    "onScoreUpdated",
     "team1Score",
-    "team2Score"
+    "team2Score",
+    "onMatchFinished",
+    "Match*",
+    "match"
 );
 #else  // !QT_MOC_HAS_STRING_DATA
 struct qt_meta_stringdata_CLASSMainWindowENDCLASS_t {
-    uint offsetsAndSizes[22];
+    uint offsetsAndSizes[28];
     char stringdata0[11];
-    char stringdata1[19];
+    char stringdata1[27];
     char stringdata2[1];
-    char stringdata3[20];
-    char stringdata4[18];
-    char stringdata5[15];
-    char stringdata6[11];
-    char stringdata7[6];
-    char stringdata8[19];
+    char stringdata3[28];
+    char stringdata4[34];
+    char stringdata5[33];
+    char stringdata6[18];
+    char stringdata7[17];
+    char stringdata8[15];
     char stringdata9[11];
     char stringdata10[11];
+    char stringdata11[16];
+    char stringdata12[7];
+    char stringdata13[6];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(sizeof(qt_meta_stringdata_CLASSMainWindowENDCLASS_t::offsetsAndSizes) + ofs), len 
 Q_CONSTINIT static const qt_meta_stringdata_CLASSMainWindowENDCLASS_t qt_meta_stringdata_CLASSMainWindowENDCLASS = {
     {
         QT_MOC_LITERAL(0, 10),  // "MainWindow"
-        QT_MOC_LITERAL(11, 18),  // "onAddPlayerClicked"
-        QT_MOC_LITERAL(30, 0),  // ""
-        QT_MOC_LITERAL(31, 19),  // "onCreateTeamClicked"
-        QT_MOC_LITERAL(51, 17),  // "onSimulateClicked"
-        QT_MOC_LITERAL(69, 14),  // "handleNewEvent"
-        QT_MOC_LITERAL(84, 10),  // "MatchEvent"
-        QT_MOC_LITERAL(95, 5),  // "event"
-        QT_MOC_LITERAL(101, 18),  // "handleScoreChanged"
-        QT_MOC_LITERAL(120, 10),  // "team1Score"
-        QT_MOC_LITERAL(131, 10)   // "team2Score"
+        QT_MOC_LITERAL(11, 26),  // "on_addPlayerButton_clicked"
+        QT_MOC_LITERAL(38, 0),  // ""
+        QT_MOC_LITERAL(39, 27),  // "on_createTeamButton_clicked"
+        QT_MOC_LITERAL(67, 33),  // "on_createTournamentButton_cli..."
+        QT_MOC_LITERAL(101, 32),  // "on_startTournamentButton_clicked"
+        QT_MOC_LITERAL(134, 17),  // "onSimulationEvent"
+        QT_MOC_LITERAL(152, 16),  // "eventDescription"
+        QT_MOC_LITERAL(169, 14),  // "onScoreUpdated"
+        QT_MOC_LITERAL(184, 10),  // "team1Score"
+        QT_MOC_LITERAL(195, 10),  // "team2Score"
+        QT_MOC_LITERAL(206, 15),  // "onMatchFinished"
+        QT_MOC_LITERAL(222, 6),  // "Match*"
+        QT_MOC_LITERAL(229, 5)   // "match"
     },
     "MainWindow",
-    "onAddPlayerClicked",
+    "on_addPlayerButton_clicked",
     "",
-    "onCreateTeamClicked",
-    "onSimulateClicked",
-    "handleNewEvent",
-    "MatchEvent",
-    "event",
-    "handleScoreChanged",
+    "on_createTeamButton_clicked",
+    "on_createTournamentButton_clicked",
+    "on_startTournamentButton_clicked",
+    "onSimulationEvent",
+    "eventDescription",
+    "onScoreUpdated",
     "team1Score",
-    "team2Score"
+    "team2Score",
+    "onMatchFinished",
+    "Match*",
+    "match"
 };
 #undef QT_MOC_LITERAL
 #endif // !QT_MOC_HAS_STRING_DATA
@@ -103,7 +115,7 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSMainWindowENDCLASS[] = {
       11,       // revision
        0,       // classname
        0,    0, // classinfo
-       5,   14, // methods
+       7,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -111,18 +123,22 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSMainWindowENDCLASS[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    0,   44,    2, 0x08,    1 /* Private */,
-       3,    0,   45,    2, 0x08,    2 /* Private */,
-       4,    0,   46,    2, 0x08,    3 /* Private */,
-       5,    1,   47,    2, 0x08,    4 /* Private */,
-       8,    2,   50,    2, 0x08,    6 /* Private */,
+       1,    0,   56,    2, 0x08,    1 /* Private */,
+       3,    0,   57,    2, 0x08,    2 /* Private */,
+       4,    0,   58,    2, 0x08,    3 /* Private */,
+       5,    0,   59,    2, 0x08,    4 /* Private */,
+       6,    1,   60,    2, 0x08,    5 /* Private */,
+       8,    2,   63,    2, 0x08,    7 /* Private */,
+      11,    1,   68,    2, 0x08,   10 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 6,    7,
+    QMetaType::Void,
+    QMetaType::Void, QMetaType::QString,    7,
     QMetaType::Void, QMetaType::Int, QMetaType::Int,    9,   10,
+    QMetaType::Void, 0x80000000 | 12,   13,
 
        0        // eod
 };
@@ -136,19 +152,24 @@ Q_CONSTINIT const QMetaObject MainWindow::staticMetaObject = { {
     qt_incomplete_metaTypeArray<qt_meta_stringdata_CLASSMainWindowENDCLASS_t,
         // Q_OBJECT / Q_GADGET
         QtPrivate::TypeAndForceComplete<MainWindow, std::true_type>,
-        // method 'onAddPlayerClicked'
+        // method 'on_addPlayerButton_clicked'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        // method 'onCreateTeamClicked'
+        // method 'on_createTeamButton_clicked'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        // method 'onSimulateClicked'
+        // method 'on_createTournamentButton_clicked'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        // method 'handleNewEvent'
+        // method 'on_startTournamentButton_clicked'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        QtPrivate::TypeAndForceComplete<const MatchEvent &, std::false_type>,
-        // method 'handleScoreChanged'
+        // method 'onSimulationEvent'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<const QString &, std::false_type>,
+        // method 'onScoreUpdated'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         QtPrivate::TypeAndForceComplete<int, std::false_type>,
-        QtPrivate::TypeAndForceComplete<int, std::false_type>
+        QtPrivate::TypeAndForceComplete<int, std::false_type>,
+        // method 'onMatchFinished'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<Match *, std::false_type>
     >,
     nullptr
 } };
@@ -159,12 +180,25 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         auto *_t = static_cast<MainWindow *>(_o);
         (void)_t;
         switch (_id) {
-        case 0: _t->onAddPlayerClicked(); break;
-        case 1: _t->onCreateTeamClicked(); break;
-        case 2: _t->onSimulateClicked(); break;
-        case 3: _t->handleNewEvent((*reinterpret_cast< std::add_pointer_t<MatchEvent>>(_a[1]))); break;
-        case 4: _t->handleScoreChanged((*reinterpret_cast< std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[2]))); break;
+        case 0: _t->on_addPlayerButton_clicked(); break;
+        case 1: _t->on_createTeamButton_clicked(); break;
+        case 2: _t->on_createTournamentButton_clicked(); break;
+        case 3: _t->on_startTournamentButton_clicked(); break;
+        case 4: _t->onSimulationEvent((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
+        case 5: _t->onScoreUpdated((*reinterpret_cast< std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[2]))); break;
+        case 6: _t->onMatchFinished((*reinterpret_cast< std::add_pointer_t<Match*>>(_a[1]))); break;
         default: ;
+        }
+    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        switch (_id) {
+        default: *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType(); break;
+        case 6:
+            switch (*reinterpret_cast<int*>(_a[1])) {
+            default: *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType(); break;
+            case 0:
+                *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType::fromType< Match* >(); break;
+            }
+            break;
         }
     }
 }
@@ -188,13 +222,13 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 5)
+        if (_id < 7)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 5;
+        _id -= 7;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 5)
-            *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 5;
+        if (_id < 7)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 7;
     }
     return _id;
 }

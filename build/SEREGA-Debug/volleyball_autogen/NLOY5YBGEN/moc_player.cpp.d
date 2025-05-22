@@ -1,5 +1,6 @@
 C:/Users/drego/Documents/volleyball/build/SEREGA-Debug/volleyball_autogen/NLOY5YBGEN/moc_player.cpp: C:/Users/drego/Documents/volleyball/model/player.h \
   C:/Users/drego/Documents/volleyball/build/SEREGA-Debug/volleyball_autogen/moc_predefs.h \
+  C:/Users/drego/Documents/volleyball/model/team.h \
   D:/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed/limits.h \
   D:/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed/syslimits.h \
   D:/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/algorithm \
@@ -198,6 +199,7 @@ C:/Users/drego/Documents/volleyball/build/SEREGA-Debug/volleyball_autogen/NLOY5Y
   D:/QT/Tools/mingw1120_64/x86_64-w64-mingw32/include/time.h \
   D:/QT/Tools/mingw1120_64/x86_64-w64-mingw32/include/vadefs.h \
   D:/QT/Tools/mingw1120_64/x86_64-w64-mingw32/include/wchar.h \
+  D:/QT/Tools/mingw_64_2/include/QtCore/QList \
   D:/QT/Tools/mingw_64_2/include/QtCore/QObject \
   D:/QT/Tools/mingw_64_2/include/QtCore/QString \
   D:/QT/Tools/mingw_64_2/include/QtCore/q20type_traits.h \

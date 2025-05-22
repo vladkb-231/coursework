@@ -47,11 +47,12 @@ static constexpr auto qt_meta_stringdata_CLASSBasicSimulationENDCLASS = QtMocHel
     "team2Score",
     "matchFinished",
     "Match*",
-    "match"
+    "match",
+    "onNextEvent"
 );
 #else  // !QT_MOC_HAS_STRING_DATA
 struct qt_meta_stringdata_CLASSBasicSimulationENDCLASS_t {
-    uint offsetsAndSizes[20];
+    uint offsetsAndSizes[22];
     char stringdata0[16];
     char stringdata1[14];
     char stringdata2[1];
@@ -62,6 +63,7 @@ struct qt_meta_stringdata_CLASSBasicSimulationENDCLASS_t {
     char stringdata7[14];
     char stringdata8[7];
     char stringdata9[6];
+    char stringdata10[12];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(sizeof(qt_meta_stringdata_CLASSBasicSimulationENDCLASS_t::offsetsAndSizes) + ofs), len 
@@ -76,7 +78,8 @@ Q_CONSTINIT static const qt_meta_stringdata_CLASSBasicSimulationENDCLASS_t qt_me
         QT_MOC_LITERAL(72, 10),  // "team2Score"
         QT_MOC_LITERAL(83, 13),  // "matchFinished"
         QT_MOC_LITERAL(97, 6),  // "Match*"
-        QT_MOC_LITERAL(104, 5)   // "match"
+        QT_MOC_LITERAL(104, 5),  // "match"
+        QT_MOC_LITERAL(110, 11)   // "onNextEvent"
     },
     "BasicSimulation",
     "eventOccurred",
@@ -87,7 +90,8 @@ Q_CONSTINIT static const qt_meta_stringdata_CLASSBasicSimulationENDCLASS_t qt_me
     "team2Score",
     "matchFinished",
     "Match*",
-    "match"
+    "match",
+    "onNextEvent"
 };
 #undef QT_MOC_LITERAL
 #endif // !QT_MOC_HAS_STRING_DATA
@@ -99,7 +103,7 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSBasicSimulationENDCLASS[] = {
       11,       // revision
        0,       // classname
        0,    0, // classinfo
-       3,   14, // methods
+       4,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -107,20 +111,26 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSBasicSimulationENDCLASS[] = {
        3,       // signalCount
 
  // signals: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    1,   32,    2, 0x06,    1 /* Public */,
-       4,    2,   35,    2, 0x06,    3 /* Public */,
-       7,    1,   40,    2, 0x06,    6 /* Public */,
+       1,    1,   38,    2, 0x06,    1 /* Public */,
+       4,    2,   41,    2, 0x06,    3 /* Public */,
+       7,    1,   46,    2, 0x06,    6 /* Public */,
+
+ // slots: name, argc, parameters, tag, flags, initial metatype offsets
+      10,    0,   49,    2, 0x08,    8 /* Private */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::QString,    3,
     QMetaType::Void, QMetaType::Int, QMetaType::Int,    5,    6,
     QMetaType::Void, 0x80000000 | 8,    9,
 
+ // slots: parameters
+    QMetaType::Void,
+
        0        // eod
 };
 
 Q_CONSTINIT const QMetaObject BasicSimulation::staticMetaObject = { {
-    QMetaObject::SuperData::link<SimulationStrategy::staticMetaObject>(),
+    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
     qt_meta_stringdata_CLASSBasicSimulationENDCLASS.offsetsAndSizes,
     qt_meta_data_CLASSBasicSimulationENDCLASS,
     qt_static_metacall,
@@ -137,7 +147,9 @@ Q_CONSTINIT const QMetaObject BasicSimulation::staticMetaObject = { {
         QtPrivate::TypeAndForceComplete<int, std::false_type>,
         // method 'matchFinished'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        QtPrivate::TypeAndForceComplete<Match *, std::false_type>
+        QtPrivate::TypeAndForceComplete<Match *, std::false_type>,
+        // method 'onNextEvent'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>
     >,
     nullptr
 } };
@@ -151,6 +163,7 @@ void BasicSimulation::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int 
         case 0: _t->eventOccurred((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
         case 1: _t->scoreUpdated((*reinterpret_cast< std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[2]))); break;
         case 2: _t->matchFinished((*reinterpret_cast< std::add_pointer_t<Match*>>(_a[1]))); break;
+        case 3: _t->onNextEvent(); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
@@ -200,22 +213,22 @@ void *BasicSimulation::qt_metacast(const char *_clname)
     if (!_clname) return nullptr;
     if (!strcmp(_clname, qt_meta_stringdata_CLASSBasicSimulationENDCLASS.stringdata0))
         return static_cast<void*>(this);
-    return SimulationStrategy::qt_metacast(_clname);
+    return QObject::qt_metacast(_clname);
 }
 
 int BasicSimulation::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
-    _id = SimulationStrategy::qt_metacall(_c, _id, _a);
+    _id = QObject::qt_metacall(_c, _id, _a);
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 3)
+        if (_id < 4)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 3;
+        _id -= 4;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 3)
+        if (_id < 4)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 3;
+        _id -= 4;
     }
     return _id;
 }

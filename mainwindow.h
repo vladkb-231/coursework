@@ -2,8 +2,13 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QFutureWatcher>
-#include "model/match.h"
+#include <QList>
+#include "C:\Users\drego\Documents\volleyball\model\player.h"
+#include "C:\Users\drego\Documents\volleyball\model\team.h"
+#include "C:\Users\drego\Documents\volleyball\model\tournament.h"
+#include "C:\Users\drego\Documents\volleyball\simulation\basicsimulation.h"
+#include "C:\Users\drego\Documents\volleyball\model\gamerules.h"
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -13,25 +18,37 @@ class MainWindow : public QMainWindow {
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr);
+    explicit MainWindow(QWidget* parent = nullptr);
     ~MainWindow();
 
 private slots:
-    void onAddPlayerClicked();
-    void onCreateTeamClicked();
-    void onSimulateClicked();
-    void handleNewEvent(const MatchEvent& event);
-    void handleScoreChanged(int team1Score, int team2Score);
+    void on_addPlayerButton_clicked();
+    void on_createTeamButton_clicked();
+
+    void on_createTournamentButton_clicked();
+    void on_startTournamentButton_clicked();
+
+    void onSimulationEvent(const QString& eventDescription);
+    void onScoreUpdated(int team1Score, int team2Score);
+    void onMatchFinished(Match* match);
 
 private:
-    Ui::MainWindow *ui;
-    QList<Team*> m_teams;
-    TeamBuilder m_currentTeamBuilder;
-    QFutureWatcher<void> m_simulationWatcher;
+    Ui::MainWindow* ui;
 
+    QList<Player*> m_currentPlayers;
+    QList<Team*> m_teams;
+    Tournament* m_tournament = nullptr;
+    BasicSimulation* m_simulation = nullptr;
+
+    int m_currentMatchIndex = 0;
+
+    void updatePlayersList();
     void updateTeamsList();
-    void clearPlayerInputs();
+    void updateScheduleList();
+    void updateTournamentTable();
+
+    void startNextMatch();
 };
 
-#endif // MAINWINDOW_H
 
+#endif // MAINWINDOW_H

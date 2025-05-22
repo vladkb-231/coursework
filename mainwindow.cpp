@@ -1,157 +1,205 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QMessageBox>
-#include <QThread>
-#include <QtConcurrent/QtConcurrent>
-#include "model/team.h"
-#include "model/match.h"
-#include "simulation/basicsimulation.h"
+#include <QDebug>
 
-MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
-{
+MainWindow::MainWindow(QWidget* parent)
+    : QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
 
-    // Настройка диапазонов характеристик
-    ui->speedSpin->setRange(0, 100);
-    ui->attackSpin->setRange(0, 100);
-    ui->staminaSpin->setRange(0, 100);
+    m_simulation = new BasicSimulation(this);
 
-    // Подключение сигналов
-    connect(ui->addPlayerBtn, &QPushButton::clicked, this, &MainWindow::onAddPlayerClicked);
-    connect(ui->createTeamBtn, &QPushButton::clicked, this, &MainWindow::onCreateTeamClicked);
-    connect(ui->simulateBtn, &QPushButton::clicked, this, &MainWindow::onSimulateClicked);
+    connect(m_simulation, &BasicSimulation::eventOccurred, this, &MainWindow::onSimulationEvent);
+    connect(m_simulation, &BasicSimulation::scoreUpdated, this, &MainWindow::onScoreUpdated);
+    connect(m_simulation, &BasicSimulation::matchFinished, this, &MainWindow::onMatchFinished);
+
+    ui->tournamentTableWidget->setColumnCount(4);
+    ui->tournamentTableWidget->setHorizontalHeaderLabels({"Команда", "Очки", "Победы", "Поражения"});
+    ui->tournamentTableWidget->horizontalHeader()->setStretchLastSection(true);
+
+    updatePlayersList();
+    updateTeamsList();
+
+    ui->startTournamentButton->setEnabled(false);
+    ui->currentMatchLabel->setText("Матч: -");
+    ui->scoreLabel->setText("0 : 0");
 }
 
-MainWindow::~MainWindow()
-{
+MainWindow::~MainWindow() {
     delete ui;
+    qDeleteAll(m_currentPlayers);
     qDeleteAll(m_teams);
+    delete m_tournament;
 }
 
-void MainWindow::onAddPlayerClicked()
-{
+void MainWindow::on_addPlayerButton_clicked() {
     QString name = ui->playerNameEdit->text().trimmed();
-    if(name.isEmpty()) {
-        QMessageBox::warning(this, "Error", "Enter player name!");
+    if (name.isEmpty()) {
+        QMessageBox::warning(this, "Ошибка", "Введите имя игрока");
         return;
     }
 
-    Player* player = new Player(
-        name,
-        ui->speedSpin->value(),
-        ui->attackSpin->value(),
-        ui->staminaSpin->value(),
-        this
-        );
+    int speed = ui->speedSpinBox->value();
+    int attack = ui->attackSpinBox->value();
+    int stamina = ui->staminaSpinBox->value();
 
-    m_currentTeamBuilder.addPlayer(player);
-    ui->playersList->addItem(name);
+    Player* player = new Player(name, speed, attack, stamina, nullptr, this);
+    m_currentPlayers.append(player);
+    updatePlayersList();
+
     ui->playerNameEdit->clear();
 }
 
-void MainWindow::onCreateTeamClicked()
-{
+void MainWindow::updatePlayersList() {
+    ui->playersListWidget->clear();
+    for (Player* p : m_currentPlayers) {
+        ui->playersListWidget->addItem(p->name());
+    }
+}
+
+void MainWindow::on_createTeamButton_clicked() {
     QString teamName = ui->teamNameEdit->text().trimmed();
-    if(teamName.isEmpty()) {
-        QMessageBox::warning(this, "Error", "Enter team name!");
+    if (teamName.isEmpty()) {
+        QMessageBox::warning(this, "Ошибка", "Введите имя команды");
+        return;
+    }
+    if (m_currentPlayers.isEmpty()) {
+        QMessageBox::warning(this, "Ошибка", "Добавьте хотя бы одного игрока");
         return;
     }
 
-    if(m_currentTeamBuilder.getPlayers().isEmpty()) {
-        QMessageBox::warning(this, "Error", "Add at least one player!");
-        return;
+    Team* team = new Team(teamName, this);
+    for (Player* p : m_currentPlayers) {
+        team->addPlayer(p);
     }
+    m_teams.append(team);
 
-    Team* newTeam = m_currentTeamBuilder.setName(teamName).build(this);
-    m_teams.append(newTeam);
+    m_currentPlayers.clear();
+    updatePlayersList();
     updateTeamsList();
 
-    // Сбросить билдер
-    m_currentTeamBuilder = TeamBuilder();
     ui->teamNameEdit->clear();
-    ui->playersList->clear();
+
+    ui->startTournamentButton->setEnabled(false);
 }
 
-void MainWindow::updateTeamsList()
-{
-    ui->teamsList->clear();
-    ui->team1Combo->clear();
-    ui->team2Combo->clear();
-
-    for(Team* team : m_teams) {
-        QString itemText = QString("%1 (Attack: %2, Defense: %3)")
-        .arg(team->name())
-            .arg(team->attackLevel())
-            .arg(team->defenseLevel());
-
-        ui->teamsList->addItem(itemText);
-        ui->team1Combo->addItem(team->name());
-        ui->team2Combo->addItem(team->name());
+void MainWindow::updateTeamsList() {
+    ui->teamsListWidget->clear();
+    for (Team* t : m_teams) {
+        ui->teamsListWidget->addItem(t->name());
     }
 }
 
-void MainWindow::onSimulateClicked()
-{
-    if(m_teams.size() < 2) {
-        QMessageBox::warning(this, "Error", "Create at least two teams!");
+void MainWindow::on_createTournamentButton_clicked() {
+    if (m_teams.size() < 2) {
+        QMessageBox::warning(this, "Ошибка", "Добавьте минимум 2 команды");
         return;
     }
 
-    int idx1 = ui->team1Combo->currentIndex();
-    int idx2 = ui->team2Combo->currentIndex();
+    if (m_tournament) {
+        delete m_tournament;
+        m_tournament = nullptr;
+    }
 
-    if(idx1 == idx2 || idx1 < 0 || idx2 < 0) {
-        QMessageBox::warning(this, "Error", "Select different teams!");
+    m_tournament = new Tournament("Турнир", this);
+    for (Team* t : m_teams) {
+        m_tournament->addTeam(t);
+    }
+    m_tournament->generateSchedule();
+
+    m_currentMatchIndex = 0;
+
+    updateScheduleList();
+    updateTournamentTable();
+
+    ui->startTournamentButton->setEnabled(true);
+}
+
+void MainWindow::on_startTournamentButton_clicked() {
+    if (!m_tournament || m_tournament->schedule().isEmpty()) {
+        QMessageBox::warning(this, "Ошибка", "Создайте турнир с расписанием");
         return;
     }
 
-    Match* match = new Match(m_teams[idx1], m_teams[idx2], this);
+    ui->startTournamentButton->setEnabled(false);
+    ui->matchLogTextEdit->clear();
+    ui->currentMatchLabel->setText("Матч: -");
+    ui->scoreLabel->setText("0 : 0");
 
-    // Подключение сигналов
-    connect(match, &Match::eventAdded, this, &MainWindow::handleNewEvent);
-    connect(match, &Match::scoreChanged, this, &MainWindow::handleScoreChanged);
+    startNextMatch();
+}
 
-    // Запуск в отдельном потоке
-    QtConcurrent::run([this, match](){
-        BasicSimulation simulator;
-        simulator.simulate(match, GameRules(3, 6, 25));
-        QMetaObject::invokeMethod(this, [this, match](){
-            QMessageBox::information(this, "Result",
-                                     QString("%1 %2 - %3 %4")
-                                         .arg(match->team1()->name())
-                                         .arg(match->score()[match->team1()])
-                                         .arg(match->score()[match->team2()])
-                                         .arg(match->team2()->name()));
-            match->deleteLater();
-        });
+void MainWindow::startNextMatch() {
+    if (!m_tournament || m_currentMatchIndex >= m_tournament->schedule().size()) {
+        QMessageBox::information(this, "Турнир", "Турнир завершён!");
+        ui->currentMatchLabel->setText("Матч: -");
+        ui->scoreLabel->setText("0 : 0");
+        return;
+    }
+
+    Match* match = m_tournament->schedule().at(m_currentMatchIndex);
+    ui->currentMatchLabel->setText(QString("Матч: %1 vs %2").arg(match->team1()->name()).arg(match->team2()->name()));
+
+    ui->scoreLabel->setText("0 : 0");
+    ui->matchLogTextEdit->append(QString("\n--- Начинается матч %1 vs %2 ---").arg(match->team1()->name()).arg(match->team2()->name()));
+
+    m_simulation->simulateStepByStep(match, GameRules());
+}
+
+void MainWindow::onSimulationEvent(const QString& eventDescription) {
+    ui->matchLogTextEdit->append(eventDescription);
+}
+
+void MainWindow::onScoreUpdated(int team1Score, int team2Score) {
+    ui->scoreLabel->setText(QString("%1 : %2").arg(team1Score).arg(team2Score));
+}
+
+void MainWindow::onMatchFinished(Match* match) {
+    m_tournament->updateTournament(match);
+    updateTournamentTable();
+    updateScheduleList();
+
+    m_currentMatchIndex++;
+    startNextMatch();
+}
+
+void MainWindow::updateScheduleList() {
+    ui->scheduleListWidget->clear();
+    if (!m_tournament) return;
+
+    auto schedule = m_tournament->schedule();
+    for (int i = 0; i < schedule.size(); ++i) {
+        Match* m = schedule.at(i);
+        QString status = (i < m_currentMatchIndex) ? "[Завершён]" : "[Ожидает]";
+        ui->scheduleListWidget->addItem(QString("%1 vs %2 %3")
+                                            .arg(m->team1()->name())
+                                            .arg(m->team2()->name())
+                                            .arg(status));
+    }
+}
+
+void MainWindow::updateTournamentTable() {
+    ui->tournamentTableWidget->clearContents();
+    if (!m_tournament) return;
+
+    auto table = m_tournament->table();
+    auto points = table->points();
+    auto wins = table->wins();
+    auto losses = table->losses();
+
+    QList<Team*> teams = points.keys();
+    std::sort(teams.begin(), teams.end(), [&points](Team* a, Team* b) {
+        return points[a] > points[b];
     });
-}
 
-void MainWindow::handleNewEvent(const MatchEvent& event)
-{
-    QStringList eventTypes = {"Attack", "Block", "Serve", "Defense"};
-    QString result = event.isSuccessful() ? "✓" : "✗";
-    QString time = QDateTime::fromMSecsSinceEpoch(event.timestamp()).toString("mm:ss");
+    ui->tournamentTableWidget->setRowCount(teams.size());
 
-    ui->eventsLog->addItem(
-        QString("[%1] %2: %3 %4 (%5)")
-            .arg(time)
-            .arg(event.team()->name())
-            .arg(eventTypes[event.type()])
-            .arg(result)
-            .arg(event.player()->name())
-        );
-    ui->eventsLog->scrollToBottom();
-}
-
-void MainWindow::handleScoreChanged(int team1Score, int team2Score)
-{
-    ui->lblScore->setText(
-        QString("Score: %1 - %2")
-            .arg(team1Score)
-            .arg(team2Score)
-        );
+    for (int row = 0; row < teams.size(); ++row) {
+        Team* team = teams[row];
+        ui->tournamentTableWidget->setItem(row, 0, new QTableWidgetItem(team->name()));
+        ui->tournamentTableWidget->setItem(row, 1, new QTableWidgetItem(QString::number(points.value(team, 0))));
+        ui->tournamentTableWidget->setItem(row, 2, new QTableWidgetItem(QString::number(wins.value(team, 0))));
+        ui->tournamentTableWidget->setItem(row, 3, new QTableWidgetItem(QString::number(losses.value(team, 0))));
+    }
 }
 
