@@ -19,6 +19,10 @@ void BasicSimulation::simulate(Match* match, const GameRules& rules) {
     m_team1Score = 0;
     m_team2Score = 0;
 
+    // Сбрасываем счет в объекте Match
+    m_currentMatch->updateScore(m_currentMatch->team1(), 0);
+    m_currentMatch->updateScore(m_currentMatch->team2(), 0);
+
     emit eventOccurred("Матч начался: " + match->team1()->name() + " vs " + match->team2()->name());
     m_timer.start(500);
 }
@@ -48,29 +52,35 @@ void BasicSimulation::generateNextEvent() {
         );
     m_currentMatch->addEvent(event);
 
+    // Обновление счета по правилам волейбола
     if (success) {
         if (eventType == Match::Event::Attack || eventType == Match::Event::Serve) {
             (team1Acts ? m_team1Score : m_team2Score)++;
         }
-    } else if (eventType == Match::Event::Attack) {
-        // Очко получает противоположная команда
-        (team1Acts ? m_team2Score : m_team1Score)++;
+    } else {
+        if (eventType == Match::Event::Attack || eventType == Match::Event::Block) {
+            (team1Acts ? m_team2Score : m_team1Score)++;
+        }
     }
 
-    emit eventOccurred(QString("[%1] %2: %3 (%4)")
-                           .arg(QDateTime::fromMSecsSinceEpoch(event.timestamp()).toString("mm:ss"))
+    emit eventOccurred(QString("%1: %2 (%3)")
                            .arg(actingTeam->name())
                            .arg(Match::Event::typeToString(eventType))
                            .arg(success ? "Успех" : "Провал"));
 
     emit scoreUpdated(m_team1Score, m_team2Score);
 
-    if ((m_team1Score >= m_rules.getPointsToWinSet() ||
-         m_team2Score >= m_rules.getPointsToWinSet()) &&
+    // Проверка условий завершения сета по волейбольным правилам
+    const bool isTieBreak = (m_team1Score >= 24 && m_team2Score >= 24);
+    const int pointsToWin = isTieBreak ? 26 : 25; // Для тай-брейка до 26
+
+    if ((m_team1Score >= pointsToWin || m_team2Score >= pointsToWin) &&
         qAbs(m_team1Score - m_team2Score) >= 2)
     {
         m_timer.stop();
         if (m_currentMatch) {
+            m_currentMatch->updateScore(team1, m_team1Score);
+            m_currentMatch->updateScore(team2, m_team2Score);
             emit matchFinished(m_currentMatch);
             m_currentMatch = nullptr;
         }
@@ -83,12 +93,20 @@ bool BasicSimulation::calculateSuccess(Team* acting, Team* opponent,
 {
     int baseChance = 0;
     switch(type) {
-    case Match::Event::Attack: baseChance = acting->attackLevel() - opponent->defenseLevel() + 50; break;
-    case Match::Event::Block: baseChance = opponent->defenseLevel() - acting->attackLevel() + 40; break;
-    case Match::Event::Serve: baseChance = static_cast<int>(acting->attackLevel() * 0.8); break;
-    case Match::Event::Defense: baseChance = static_cast<int>(acting->defenseLevel() * 1.2 - opponent->attackLevel()); break;
+    case Match::Event::Attack:
+        baseChance = acting->attackLevel() - opponent->defenseLevel() + 50;
+        break;
+    case Match::Event::Block:
+        baseChance = acting->defenseLevel() - opponent->attackLevel() + 40;
+        break;
+    case Match::Event::Serve:
+        baseChance = static_cast<int>(acting->attackLevel() * 0.7 + acting->defenseLevel() * 0.3);
+        break;
+    case Match::Event::Defense:
+        baseChance = static_cast<int>(acting->defenseLevel() * 1.5 - opponent->attackLevel());
+        break;
     }
-    return rand->bounded(100) < qBound(20, baseChance, 80);
+    return rand->bounded(100) < qBound(15, baseChance, 85);
 }
 
 

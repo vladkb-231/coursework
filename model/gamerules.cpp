@@ -1,4 +1,3 @@
-// gamerules.cpp
 #include "gamerules.h"
 
 GameRules::GameRules(int setsToWin, int maxSubstitutions, int pointsToWinSet)

@@ -21,6 +21,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(m_simulation, &BasicSimulation::eventOccurred, this, &MainWindow::onSimulationEvent);
     connect(m_simulation, &BasicSimulation::scoreUpdated, this, &MainWindow::onScoreUpdated);
     connect(m_simulation, &BasicSimulation::matchFinished, this, &MainWindow::onMatchFinished);
+    connect(ui->playersListWidget, &QListWidget::doubleClicked, this, &MainWindow::onPlayerDoubleClicked);
 }
 
 
@@ -52,16 +53,20 @@ void MainWindow::on_addPlayerButton_clicked()
     ui->playerNameEdit->clear();
 }
 
-void MainWindow::on_createTeamButton_clicked()
-{
+void MainWindow::on_createTeamButton_clicked() {
     QString teamName = ui->teamNameEdit->text().trimmed();
     if(teamName.isEmpty()) {
         QMessageBox::warning(this, "Ошибка", "Введите имя команды");
         return;
     }
 
-    if(m_currentPlayers.isEmpty()) {
-        QMessageBox::warning(this, "Ошибка", "Добавьте игроков в команду");
+    // Проверка количества игроков
+    if(m_currentPlayers.size() != 6) {
+        QMessageBox::warning(
+            this,
+            "Ошибка",
+            QString("В команде должно быть 6 игроков! Сейчас: %1").arg(m_currentPlayers.size())
+            );
         return;
     }
 
@@ -80,8 +85,39 @@ void MainWindow::on_createTeamButton_clicked()
     ui->teamNameEdit->clear();
 }
 
-void MainWindow::on_createTournamentButton_clicked()
-{
+void MainWindow::on_createTournamentButton_clicked() {
+    // Добавить проверку состава команд
+    for(Team* team : m_teams) {
+
+        bool validTeams = true;
+        QString errorMsg;
+        for(Team* team : m_teams) {
+            if(team->players().size() != 6) {
+                validTeams = false;
+                errorMsg = QString("Команда '%1' имеет %2/6 игроков!")
+                               .arg(team->name())
+                               .arg(team->players().size());
+                break;
+            }
+        }
+
+        if(!validTeams) {
+            QMessageBox::warning(this, "Ошибка", errorMsg);
+            return;
+        }
+
+        if(team->players().size() != 6) {
+            QMessageBox::warning(
+                this,
+                "Ошибка",
+                QString("Команда '%1' имеет некорректный состав (%2/6 игроков)!")
+                    .arg(team->name())
+                    .arg(team->players().size())
+                );
+            return;
+        }
+    }
+
     if(m_teams.size() < 2) {
         QMessageBox::warning(this, "Ошибка", "Необходимо минимум 2 команды");
         return;
@@ -126,7 +162,27 @@ void MainWindow::onScoreUpdated(int team1Score, int team2Score)
     ui->scoreLabel->setText(QString("%1 : %2").arg(team1Score).arg(team2Score));
 }
 
-void MainWindow::onMatchFinished(Match* match) {
+QList<Team*> MainWindow::findTournamentLeaders()
+{
+    QMap<Team*, int> points = m_tournament->table()->points();
+    int maxPoints = 0;
+    QList<Team*> leaders;
+
+    for (Team* team : points.keys()) {
+        if (points[team] > maxPoints) {
+            maxPoints = points[team];
+            leaders.clear();
+            leaders.append(team);
+        }
+        else if (points[team] == maxPoints) {
+            leaders.append(team);
+        }
+    }
+    return leaders;
+}
+
+void MainWindow::onMatchFinished(Match* match)
+{
     if (m_tournamentFinished) return;
 
     m_tournament->updateTournament(match);
@@ -134,25 +190,43 @@ void MainWindow::onMatchFinished(Match* match) {
     updateScheduleList();
 
     m_currentMatchIndex++;
+
+    // Проверка завершения всех матчей
     if (m_currentMatchIndex >= m_tournament->schedule().size()) {
-        m_tournamentFinished = true;
-        QMessageBox::information(this, "Турнир завершен", "Все матчи сыграны!");
-        ui->currentMatchLabel->setText("Матч: -");
-        return;
-    }
+        // Поиск команд с максимальными очками
+        QList<Team*> leaders = findTournamentLeaders();
 
-    QTimer::singleShot(1000, this, [this]() {
-        startNextMatch();
-    });
+        if (leaders.size() > 1) {
+            // Создаем дополнительный матч
+            Match* tiebreaker = new Match(leaders.first(), leaders.last(), m_tournament);
+            m_tournament->schedule().append(tiebreaker);
+
+            QMessageBox::information(this,
+                                     "Дополнительный матч",
+                                     QString("%1 vs %2 для определения победителя!")
+                                         .arg(leaders.first()->name())
+                                         .arg(leaders.last()->name()));
+
+            m_tournamentFinished = false;
+            startNextMatch();
+            return;
+        }
+        else {
+            m_tournamentFinished = true;
+            QMessageBox::information(this,
+                                     "Турнир завершен",
+                                     "Победитель: " + leaders.first()->name());
+            ui->currentMatchLabel->setText("Матч: -");
+        }
+    }
+    else {
+        QTimer::singleShot(1000, this, [this]() {
+            startNextMatch();
+        });
+    }
 }
 
-void MainWindow::updatePlayersList()
-{
-    ui->playersListWidget->clear();
-    for(Player* player : m_currentPlayers) {
-        ui->playersListWidget->addItem(player->name());
-    }
-}
+
 
 void MainWindow::updateTeamsList()
 {
@@ -164,6 +238,26 @@ void MainWindow::updateTeamsList()
                 .arg(team->attackLevel())
                 .arg(team->defenseLevel()));
     }
+}
+
+void MainWindow::updatePlayersList()
+{
+    ui->playersListWidget->clear();
+    for(Player* player : m_currentPlayers) {
+        QListWidgetItem* item = new QListWidgetItem(
+            QString("%1 (А: %2, С: %3)").arg(player->name())
+                .arg(player->attack())
+                .arg(player->speed())
+            );
+        ui->playersListWidget->addItem(item);
+    }
+
+    // Добавляем счетчик с цветовой индикацией
+    QListWidgetItem* counter = new QListWidgetItem(
+        QString("Игроков: %1/6 | Двойной клик для удаления").arg(m_currentPlayers.size())
+        );
+    counter->setForeground(m_currentPlayers.size() == 6 ? Qt::darkGreen : Qt::red);
+    ui->playersListWidget->addItem(counter);
 }
 
 void MainWindow::updateScheduleList()
@@ -186,33 +280,27 @@ void MainWindow::updateScheduleList()
 void MainWindow::updateTournamentTable()
 {
     ui->tournamentTableWidget->setRowCount(0);
-    if(!m_tournament) return;
+    if (!m_tournament) return;
 
-    auto table = m_tournament->table();
-    auto points = table->points();
-    auto wins = table->wins();
-    auto losses = table->losses();
+    TournamentTable* table = m_tournament->table();
+    QList<Team*> teams = m_tournament->teams(); // Все команды турнира
 
-    QList<Team*> teams = points.keys();
-    std::sort(teams.begin(), teams.end(), [&points](Team* a, Team* b) {
-        return points[a] > points[b];
+    // Сортируем по убыванию очков с учетом отсутствующих значений
+    std::sort(teams.begin(), teams.end(), [table](Team* a, Team* b) {
+        return table->points().value(a, 0) > table->points().value(b, 0);
     });
 
-    for(Team* team : teams) {
+    // Заполняем таблицу
+    for (Team* team : teams) {
         int row = ui->tournamentTableWidget->rowCount();
         ui->tournamentTableWidget->insertRow(row);
 
-        ui->tournamentTableWidget->setItem(row, 0,
-                                           new QTableWidgetItem(team->name()));
-        ui->tournamentTableWidget->setItem(row, 1,
-                                           new QTableWidgetItem(QString::number(points[team])));
-        ui->tournamentTableWidget->setItem(row, 2,
-                                           new QTableWidgetItem(QString::number(wins[team])));
-        ui->tournamentTableWidget->setItem(row, 3,
-                                           new QTableWidgetItem(QString::number(losses[team])));
+        ui->tournamentTableWidget->setItem(row, 0, new QTableWidgetItem(team->name()));
+        ui->tournamentTableWidget->setItem(row, 1, new QTableWidgetItem(QString::number(table->points().value(team, 0)))); // Исправлено
+        ui->tournamentTableWidget->setItem(row, 2, new QTableWidgetItem(QString::number(table->wins().value(team, 0)))); // Исправлено
+        ui->tournamentTableWidget->setItem(row, 3, new QTableWidgetItem(QString::number(table->losses().value(team, 0)))); // Исправлено
     }
 }
-
 
 void MainWindow::startNextMatch() {
     if (m_tournamentFinished) return;
@@ -220,8 +308,22 @@ void MainWindow::startNextMatch() {
     Match* nextMatch = m_tournament->schedule().at(m_currentMatchIndex);
     ui->currentMatchLabel->setText(QString("Матч: %1 vs %2").arg(nextMatch->team1()->name()).arg(nextMatch->team2()->name()));
     ui->scoreLabel->setText("0 : 0");
-    m_simulation->simulate(nextMatch, GameRules(3, 25, 30));
+    m_simulation->simulate(nextMatch, GameRules(3, 6, 25));
 }
+
+void MainWindow::onPlayerDoubleClicked(const QModelIndex &index)
+{
+    // Удаляем только игроков, а не счетчик
+    if (index.row() < m_currentPlayers.size()) {
+        Player* player = m_currentPlayers.takeAt(index.row());
+        delete player;
+        updatePlayersList();
+
+        // Обновляем доступность кнопки создания команды
+        ui->createTeamButton->setEnabled(m_currentPlayers.size() == 6);
+    }
+}
+
 
 
 

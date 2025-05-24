@@ -16,4 +16,3 @@ public:
 };
 
 #endif // SIMULATIONSTRATEGY_H
-

@@ -5,7 +5,7 @@
 #include <QMap>
 #include <QDateTime>
 #include <QString>
-#include <QList>  // Добавлено для QList
+#include <QList>
 
 class Team;
 class Player;
@@ -49,7 +49,8 @@ public:
     Team* team1() const;
     Team* team2() const;
     QMap<Team*, int> score() const;
-    void addEvent(const Event& event);  // Объявление метода
+    void addEvent(const Event& event);
+    void updateScore(Team* team, int score); // Добавленный метод
 
 signals:
     void eventAdded(const Event& event);
@@ -58,7 +59,7 @@ private:
     Team* m_team1;
     Team* m_team2;
     QMap<Team*, int> m_score;
-    QList<Event*> m_events;  // Добавлен список событий
+    QList<Event*> m_events;
 };
 
 #endif // MATCH_H

@@ -51,11 +51,14 @@ static constexpr auto qt_meta_stringdata_CLASSMainWindowENDCLASS = QtMocHelpers:
     "team2Score",
     "onMatchFinished",
     "Match*",
-    "match"
+    "match",
+    "onPlayerDoubleClicked",
+    "QModelIndex",
+    "index"
 );
 #else  // !QT_MOC_HAS_STRING_DATA
 struct qt_meta_stringdata_CLASSMainWindowENDCLASS_t {
-    uint offsetsAndSizes[28];
+    uint offsetsAndSizes[34];
     char stringdata0[11];
     char stringdata1[27];
     char stringdata2[1];
@@ -70,6 +73,9 @@ struct qt_meta_stringdata_CLASSMainWindowENDCLASS_t {
     char stringdata11[16];
     char stringdata12[7];
     char stringdata13[6];
+    char stringdata14[22];
+    char stringdata15[12];
+    char stringdata16[6];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(sizeof(qt_meta_stringdata_CLASSMainWindowENDCLASS_t::offsetsAndSizes) + ofs), len 
@@ -88,7 +94,10 @@ Q_CONSTINIT static const qt_meta_stringdata_CLASSMainWindowENDCLASS_t qt_meta_st
         QT_MOC_LITERAL(195, 10),  // "team2Score"
         QT_MOC_LITERAL(206, 15),  // "onMatchFinished"
         QT_MOC_LITERAL(222, 6),  // "Match*"
-        QT_MOC_LITERAL(229, 5)   // "match"
+        QT_MOC_LITERAL(229, 5),  // "match"
+        QT_MOC_LITERAL(235, 21),  // "onPlayerDoubleClicked"
+        QT_MOC_LITERAL(257, 11),  // "QModelIndex"
+        QT_MOC_LITERAL(269, 5)   // "index"
     },
     "MainWindow",
     "on_addPlayerButton_clicked",
@@ -103,7 +112,10 @@ Q_CONSTINIT static const qt_meta_stringdata_CLASSMainWindowENDCLASS_t qt_meta_st
     "team2Score",
     "onMatchFinished",
     "Match*",
-    "match"
+    "match",
+    "onPlayerDoubleClicked",
+    "QModelIndex",
+    "index"
 };
 #undef QT_MOC_LITERAL
 #endif // !QT_MOC_HAS_STRING_DATA
@@ -115,7 +127,7 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSMainWindowENDCLASS[] = {
       11,       // revision
        0,       // classname
        0,    0, // classinfo
-       7,   14, // methods
+       8,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -123,13 +135,14 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSMainWindowENDCLASS[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    0,   56,    2, 0x08,    1 /* Private */,
-       3,    0,   57,    2, 0x08,    2 /* Private */,
-       4,    0,   58,    2, 0x08,    3 /* Private */,
-       5,    0,   59,    2, 0x08,    4 /* Private */,
-       6,    1,   60,    2, 0x08,    5 /* Private */,
-       8,    2,   63,    2, 0x08,    7 /* Private */,
-      11,    1,   68,    2, 0x08,   10 /* Private */,
+       1,    0,   62,    2, 0x08,    1 /* Private */,
+       3,    0,   63,    2, 0x08,    2 /* Private */,
+       4,    0,   64,    2, 0x08,    3 /* Private */,
+       5,    0,   65,    2, 0x08,    4 /* Private */,
+       6,    1,   66,    2, 0x08,    5 /* Private */,
+       8,    2,   69,    2, 0x08,    7 /* Private */,
+      11,    1,   74,    2, 0x08,   10 /* Private */,
+      14,    1,   77,    2, 0x08,   12 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
@@ -139,6 +152,7 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSMainWindowENDCLASS[] = {
     QMetaType::Void, QMetaType::QString,    7,
     QMetaType::Void, QMetaType::Int, QMetaType::Int,    9,   10,
     QMetaType::Void, 0x80000000 | 12,   13,
+    QMetaType::Void, 0x80000000 | 15,   16,
 
        0        // eod
 };
@@ -169,7 +183,10 @@ Q_CONSTINIT const QMetaObject MainWindow::staticMetaObject = { {
         QtPrivate::TypeAndForceComplete<int, std::false_type>,
         // method 'onMatchFinished'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        QtPrivate::TypeAndForceComplete<Match *, std::false_type>
+        QtPrivate::TypeAndForceComplete<Match *, std::false_type>,
+        // method 'onPlayerDoubleClicked'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<const QModelIndex &, std::false_type>
     >,
     nullptr
 } };
@@ -187,6 +204,7 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 4: _t->onSimulationEvent((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
         case 5: _t->onScoreUpdated((*reinterpret_cast< std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[2]))); break;
         case 6: _t->onMatchFinished((*reinterpret_cast< std::add_pointer_t<Match*>>(_a[1]))); break;
+        case 7: _t->onPlayerDoubleClicked((*reinterpret_cast< std::add_pointer_t<QModelIndex>>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
@@ -222,13 +240,13 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 7)
+        if (_id < 8)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 7;
+        _id -= 8;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 7)
+        if (_id < 8)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 7;
+        _id -= 8;
     }
     return _id;
 }

@@ -32,11 +32,13 @@ private slots:
     void onSimulationEvent(const QString& eventDescription);
     void onScoreUpdated(int team1Score, int team2Score);
     void onMatchFinished(Match* match);
+    void onPlayerDoubleClicked(const QModelIndex &index);
 
 private:
     Ui::MainWindow *ui;
     QList<Player*> m_currentPlayers;
     QList<Team*> m_teams;
+    QList<Team*> findTournamentLeaders();
     Tournament* m_tournament = nullptr;
     BasicSimulation* m_simulation = nullptr;
     int m_currentMatchIndex = 0;
@@ -50,4 +52,7 @@ private:
 };
 
 #endif // MAINWINDOW_H
+
+
+
 

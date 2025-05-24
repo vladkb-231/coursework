@@ -5,7 +5,7 @@ class GameRules {
 public:
     explicit GameRules(int setsToWin = 3,
                        int maxSubstitutions = 6,
-                       int pointsToWinSet = 25);
+                       int pointsToWinSet = 25); // 25 очков за сет
 
     // Исправленные названия методов
     int getSetsToWin() const;

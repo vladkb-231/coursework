@@ -39,4 +39,3 @@ int Team::attackLevel() const {
 int Team::defenseLevel() const {
     return m_defenseLevel;
 }
-
