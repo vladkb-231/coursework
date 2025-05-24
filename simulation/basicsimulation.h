@@ -10,8 +10,6 @@
 #include "C:\Users\drego\Documents\volleyball\model\tournament.h"
 #include <QRandomGenerator>
 
-class GameRules;
-
 class BasicSimulation : public SimulationStrategy {
     Q_OBJECT
 public:
@@ -27,7 +25,7 @@ private:
     void generateNextEvent();
     bool calculateSuccess(Team* acting, Team* opponent,
                           Match::Event::Type type,
-                          QRandomGenerator* rand); // Объявление метода
+                          QRandomGenerator* rand);
 
     QTimer m_timer;
     Match* m_currentMatch;

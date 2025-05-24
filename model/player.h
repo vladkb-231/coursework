@@ -4,7 +4,7 @@
 #include <QObject>
 #include <QString>
 
-class Team; // Forward declaration
+class Team;
 
 class Player : public QObject {
     Q_OBJECT
@@ -30,6 +30,7 @@ private:
     int m_stamina;
     Team* m_team;
 };
+
 
 #endif // PLAYER_H
 

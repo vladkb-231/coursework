@@ -10,3 +10,4 @@ int Player::attack() const { return m_attack; }
 int Player::stamina() const { return m_stamina; }
 Team* Player::team() const { return m_team; }
 void Player::setTeam(Team* team) { m_team = team; }
+

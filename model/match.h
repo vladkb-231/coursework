@@ -50,7 +50,10 @@ public:
     Team* team2() const;
     QMap<Team*, int> score() const;
     void addEvent(const Event& event);
-    void updateScore(Team* team, int score); // Добавленный метод
+    void updateScore(Team* team, int score);
+    bool isFinished() const;
+    Player* getBestPlayer() const;
+    int getBestPlayerCount() const;
 
 signals:
     void eventAdded(const Event& event);
@@ -60,6 +63,9 @@ private:
     Team* m_team2;
     QMap<Team*, int> m_score;
     QList<Event*> m_events;
+    QMap<Player*, int> m_playerEventCounts;
 };
 
 #endif // MATCH_H
+
+

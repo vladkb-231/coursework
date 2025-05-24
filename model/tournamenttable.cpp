@@ -55,3 +55,4 @@ QMap<Team*, int> TournamentTable::losses() const {
     return m_losses;
 }
 
+

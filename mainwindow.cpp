@@ -181,32 +181,36 @@ QList<Team*> MainWindow::findTournamentLeaders()
     return leaders;
 }
 
-void MainWindow::onMatchFinished(Match* match)
-{
+void MainWindow::onMatchFinished(Match* match) {
     if (m_tournamentFinished) return;
 
     m_tournament->updateTournament(match);
     updateTournamentTable();
     updateScheduleList();
 
+    // Отображение лучшего игрока
+    Player* bestPlayer = match->getBestPlayer();
+    if (bestPlayer) {
+        QMessageBox::information(this,
+                                 "Лучший игрок матча",
+                                 QString("%1 (%2) - %3 событий")
+                                     .arg(bestPlayer->name())
+                                     .arg(bestPlayer->team()->name())
+                                     .arg(match->getBestPlayerCount()));
+    }
+
     m_currentMatchIndex++;
 
-    // Проверка завершения всех матчей
     if (m_currentMatchIndex >= m_tournament->schedule().size()) {
-        // Поиск команд с максимальными очками
         QList<Team*> leaders = findTournamentLeaders();
-
         if (leaders.size() > 1) {
-            // Создаем дополнительный матч
             Match* tiebreaker = new Match(leaders.first(), leaders.last(), m_tournament);
             m_tournament->schedule().append(tiebreaker);
-
             QMessageBox::information(this,
                                      "Дополнительный матч",
                                      QString("%1 vs %2 для определения победителя!")
                                          .arg(leaders.first()->name())
                                          .arg(leaders.last()->name()));
-
             m_tournamentFinished = false;
             startNextMatch();
             return;
@@ -260,15 +264,14 @@ void MainWindow::updatePlayersList()
     ui->playersListWidget->addItem(counter);
 }
 
-void MainWindow::updateScheduleList()
-{
+void MainWindow::updateScheduleList() {
     ui->scheduleListWidget->clear();
     if(!m_tournament) return;
 
     auto schedule = m_tournament->schedule();
     for(int i = 0; i < schedule.size(); ++i) {
         Match* m = schedule.at(i);
-        QString status = (i < m_currentMatchIndex) ? "[Завершён]" : "[Ожидает]";
+        QString status = m->isFinished() ? "[Завершён]" : "[Ожидает]";
         ui->scheduleListWidget->addItem(
             QString("%1 vs %2 %3")
                 .arg(m->team1()->name())

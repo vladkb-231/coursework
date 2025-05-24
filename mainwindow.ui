@@ -11,16 +11,152 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Симуляция турнира</string>
+   <string>Volleyball Tournament Manager</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">
+    /* Основные стили */
+    QMainWindow {
+        background: qlineargradient(x1:0, y1:0, x2:1, y2:1,
+                    stop:0 #2c3e50, stop:1 #3498db);
+    }
+    QTabWidget::pane {
+        border: 2px solid #e67e22;
+        border-radius: 5px;
+        background: rgba(52, 73, 94, 0.9);
+    }
+    QTabBar::tab {
+        background: #34495e;
+        color: #ecf0f1;
+        padding: 10px 20px;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        font-weight: bold;
+    }
+    QTabBar::tab:selected {
+        background: #e67e22;
+        color: #2c3e50;
+    }
+    QPushButton {
+        background-color: #e67e22;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        padding: 8px 15px;
+        font-weight: bold;
+        min-width: 100px;
+    }
+    QPushButton:hover {
+        background-color: #d35400;
+    }
+    QPushButton:disabled {
+        background-color: #95a5a6;
+    }
+    QListWidget {
+        background: rgba(236, 240, 241, 0.9);
+        border: 2px solid #bdc3c7;
+        border-radius: 5px;
+        font-size: 14px;
+    }
+    QListWidget::item {
+        padding: 8px;
+        border-bottom: 1px solid #bdc3c7;
+    }
+    QListWidget::item:selected {
+        background: #3498db;
+        color: white;
+    }
+    QTableWidget {
+        background: rgba(236, 240, 241, 0.9);
+        border: 2px solid #bdc3c7;
+        border-radius: 5px;
+        alternate-background-color: #f8f9f9;
+        gridline-color: #bdc3c7;
+    }
+    QHeaderView::section {
+        background-color: #e67e22;
+        color: white;
+        padding: 10px;
+        border: none;
+        font-weight: bold;
+    }
+    QTextEdit {
+        background: rgba(236, 240, 241, 0.9);
+        border: 2px solid #bdc3c7;
+        border-radius: 5px;
+        font-family: 'Arial';
+        font-size: 14px;
+    }
+    QLabel {
+        color: #ecf0f1;
+        font-weight: bold;
+        font-size: 14px;
+    }
+    QSpinBox, QLineEdit {
+        background: #ecf0f1;
+        border: 2px solid #bdc3c7;
+        border-radius: 4px;
+        padding: 5px;
+        min-height: 25px;
+    }
+    QSpinBox::up-button, QSpinBox::down-button {
+        width: 20px;
+    }
+
+    /* Стили для информационных сообщений */
+    QMessageBox {
+        background-color: #2c3e50;
+        border: 2px solid #e67e22;
+        border-radius: 5px;
+    }
+    QMessageBox QLabel {
+        color: #ecf0f1;
+        font-size: 14px;
+        font-weight: bold;
+    }
+    QMessageBox QPushButton {
+        background-color: #e67e22;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        padding: 8px 15px;
+        min-width: 80px;
+        font-weight: bold;
+    }
+    QMessageBox QPushButton:hover {
+        background-color: #d35400;
+    }
+    QMessageBox QPushButton:pressed {
+        background-color: #b34700;
+    }
+
+    /* Стили для сообщений об ошибках */
+    QMessageBoxCritical {
+        background-color: #e74c3c;
+        border: 2px solid #c0392b;
+    }
+    QMessageBoxCritical QLabel {
+        color: #ffffff;
+        font-size: 14px;
+        font-weight: bold;
+    }
+    QMessageBoxCritical QPushButton {
+        background-color: #c0392b;
+        color: white;
+        border: 1px solid #a93226;
+    }
+    QMessageBoxCritical QPushButton:hover {
+        background-color: #b03a2e;
+    }
+   </string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayoutMain">
     <item>
      <widget class="QTabWidget" name="tabWidget">
-      <!-- Вкладка Формирование команды -->
       <widget class="QWidget" name="tabTeam">
        <attribute name="title">
-        <string>Формирование команды</string>
+        <string>🏐 Создать команду</string>
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayoutTeam">
         <item>
@@ -34,14 +170,14 @@
           </item>
           <item>
            <widget class="QSpinBox" name="speedSpinBox">
+            <property name="prefix">
+             <string>Скорость: </string>
+            </property>
             <property name="minimum">
              <number>1</number>
             </property>
             <property name="maximum">
              <number>100</number>
-            </property>
-            <property name="prefix">
-             <string>Скорость: </string>
             </property>
             <property name="value">
              <number>50</number>
@@ -50,14 +186,14 @@
           </item>
           <item>
            <widget class="QSpinBox" name="attackSpinBox">
+            <property name="prefix">
+             <string>Атака: </string>
+            </property>
             <property name="minimum">
              <number>1</number>
             </property>
             <property name="maximum">
              <number>100</number>
-            </property>
-            <property name="prefix">
-             <string>Атака: </string>
             </property>
             <property name="value">
              <number>50</number>
@@ -66,14 +202,14 @@
           </item>
           <item>
            <widget class="QSpinBox" name="staminaSpinBox">
+            <property name="prefix">
+             <string>Выносливость: </string>
+            </property>
             <property name="minimum">
              <number>1</number>
             </property>
             <property name="maximum">
              <number>100</number>
-            </property>
-            <property name="prefix">
-             <string>Выносливость: </string>
             </property>
             <property name="value">
              <number>50</number>
@@ -83,7 +219,7 @@
           <item>
            <widget class="QPushButton" name="addPlayerButton">
             <property name="text">
-             <string>Добавить игрока</string>
+             <string>➕ Добавить</string>
             </property>
            </widget>
           </item>
@@ -97,14 +233,14 @@
           <item>
            <widget class="QLineEdit" name="teamNameEdit">
             <property name="placeholderText">
-             <string>Имя команды</string>
+             <string>Название команды</string>
             </property>
            </widget>
           </item>
           <item>
            <widget class="QPushButton" name="createTeamButton">
             <property name="text">
-             <string>Создать команду</string>
+             <string>🏁 Создать команду</string>
             </property>
            </widget>
           </item>
@@ -115,16 +251,15 @@
         </item>
        </layout>
       </widget>
-      <!-- Вкладка Турнир -->
       <widget class="QWidget" name="tabTournament">
        <attribute name="title">
-        <string>Турнир</string>
+        <string>🏆 Турнир</string>
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayoutTournament">
         <item>
          <widget class="QPushButton" name="createTournamentButton">
           <property name="text">
-           <string>Создать турнир</string>
+           <string>🎯 Создать турнир</string>
           </property>
          </widget>
         </item>
@@ -136,19 +271,22 @@
           <item>
            <widget class="QPushButton" name="startTournamentButton">
             <property name="text">
-             <string>Начать турнир</string>
+             <string>🚀 Начать турнир</string>
             </property>
            </widget>
           </item>
           <item>
            <widget class="QLabel" name="currentMatchLabel">
             <property name="text">
-             <string>Матч: -</string>
+             <string>Текущий матч: -</string>
             </property>
            </widget>
           </item>
           <item>
            <widget class="QLabel" name="scoreLabel">
+            <property name="styleSheet">
+             <string notr="true">font-size: 20px; color: #e67e22;</string>
+            </property>
             <property name="text">
              <string>0 : 0</string>
             </property>
@@ -165,11 +303,11 @@
         </item>
         <item>
          <widget class="QTableWidget" name="tournamentTableWidget">
-          <property name="columnCount">
-           <number>4</number>
-          </property>
           <property name="rowCount">
            <number>0</number>
+          </property>
+          <property name="columnCount">
+           <number>4</number>
           </property>
           <column>
            <property name="text">
@@ -178,17 +316,17 @@
           </column>
           <column>
            <property name="text">
-            <string>Очки</string>
+            <string>🏅 Очки</string>
            </property>
           </column>
           <column>
            <property name="text">
-            <string>Победы</string>
+            <string>✅ Победы</string>
            </property>
           </column>
           <column>
            <property name="text">
-            <string>Поражения</string>
+            <string>❌ Поражения</string>
            </property>
           </column>
          </widget>
@@ -199,9 +337,19 @@
     </item>
    </layout>
   </widget>
-  <widget class="QMenuBar" name="menubar"/>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>21</height>
+    </rect>
+   </property>
+  </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources/>
  <connections/>
 </ui>
+

@@ -33,5 +33,6 @@ private:
     TournamentTable* m_table;
 };
 
+
 #endif // TOURNAMENT_H
 

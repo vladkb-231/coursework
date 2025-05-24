@@ -36,3 +36,4 @@ QString Tournament::name() const { return m_name; }
 QList<Team*> Tournament::teams() const { return m_teams; }
 QList<Match*> Tournament::schedule() const { return m_schedule; }
 TournamentTable* Tournament::table() const { return m_table; }
+

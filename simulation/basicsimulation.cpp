@@ -19,7 +19,6 @@ void BasicSimulation::simulate(Match* match, const GameRules& rules) {
     m_team1Score = 0;
     m_team2Score = 0;
 
-    // Сбрасываем счет в объекте Match
     m_currentMatch->updateScore(m_currentMatch->team1(), 0);
     m_currentMatch->updateScore(m_currentMatch->team2(), 0);
 
@@ -52,7 +51,6 @@ void BasicSimulation::generateNextEvent() {
         );
     m_currentMatch->addEvent(event);
 
-    // Обновление счета по правилам волейбола
     if (success) {
         if (eventType == Match::Event::Attack || eventType == Match::Event::Serve) {
             (team1Acts ? m_team1Score : m_team2Score)++;
@@ -63,16 +61,16 @@ void BasicSimulation::generateNextEvent() {
         }
     }
 
-    emit eventOccurred(QString("%1: %2 (%3)")
+    emit eventOccurred(QString("%1: %2 (%3) - %4")
                            .arg(actingTeam->name())
                            .arg(Match::Event::typeToString(eventType))
-                           .arg(success ? "Успех" : "Провал"));
+                           .arg(success ? "Успех" : "Провал")
+                           .arg(player->name()));
 
     emit scoreUpdated(m_team1Score, m_team2Score);
 
-    // Проверка условий завершения сета по волейбольным правилам
     const bool isTieBreak = (m_team1Score >= 24 && m_team2Score >= 24);
-    const int pointsToWin = isTieBreak ? 26 : 25; // Для тай-брейка до 26
+    const int pointsToWin = isTieBreak ? 26 : 25;
 
     if ((m_team1Score >= pointsToWin || m_team2Score >= pointsToWin) &&
         qAbs(m_team1Score - m_team2Score) >= 2)

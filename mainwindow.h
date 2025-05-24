@@ -12,7 +12,6 @@
 #include "C:\Users\drego\Documents\volleyball\model\gamerules.h"
 #include "C:\Users\drego\Documents\volleyball\model\matchevent.h"
 
-
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -50,6 +49,7 @@ private:
     void updateTournamentTable();
     void startNextMatch();
 };
+
 
 #endif // MAINWINDOW_H
 
