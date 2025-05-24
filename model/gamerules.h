@@ -1,15 +1,21 @@
 #ifndef GAMERULES_H
 #define GAMERULES_H
 
-struct GameRules {
-    int setsToWin;
-    int pointsPerSet;
-    int maxPoints;
+class GameRules {
+public:
+    explicit GameRules(int setsToWin = 3,
+                       int maxSubstitutions = 6,
+                       int pointsToWinSet = 25);
 
-    GameRules(int sets = 3, int points = 25, int maxP = 30)
-        : setsToWin(sets), pointsPerSet(points), maxPoints(maxP)
-    {}
+    // Исправленные названия методов
+    int getSetsToWin() const;
+    int getMaxSubstitutions() const;
+    int getPointsToWinSet() const;  // Бывший pointsPerSet
+
+private:
+    int m_setsToWin;
+    int m_maxSubstitutions;
+    int m_pointsToWinSet; // Переименовано из pointsPerSet
 };
 
 #endif // GAMERULES_H
-

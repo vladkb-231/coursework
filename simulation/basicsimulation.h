@@ -3,34 +3,37 @@
 
 #include <QObject>
 #include <QTimer>
+#include "simulationstrategy.h"
+#include "C:\Users\drego\Documents\volleyball\model\team.h"
 #include "C:\Users\drego\Documents\volleyball\model\match.h"
 #include "C:\Users\drego\Documents\volleyball\model\gamerules.h"
-#include "C:\Users\drego\Documents\volleyball\model\matchevent.h"
+#include "C:\Users\drego\Documents\volleyball\model\tournament.h"
+#include <QRandomGenerator>
 
-class BasicSimulation : public QObject {
+class GameRules;
+
+class BasicSimulation : public SimulationStrategy {
     Q_OBJECT
 public:
     explicit BasicSimulation(QObject* parent = nullptr);
-
-    void simulateStepByStep(Match* match, const GameRules& rules);
+    void simulate(Match* match, const GameRules& rules) override;
 
 signals:
     void eventOccurred(const QString& eventDescription);
     void scoreUpdated(int team1Score, int team2Score);
     void matchFinished(Match* match);
 
-private slots:
-    void onNextEvent();
-
 private:
-    Match* m_currentMatch = nullptr;
-    GameRules m_rules;
-    int m_team1Score = 0;
-    int m_team2Score = 0;
-    QTimer m_timer;
-
     void generateNextEvent();
-};
+    bool calculateSuccess(Team* acting, Team* opponent,
+                          Match::Event::Type type,
+                          QRandomGenerator* rand); // Объявление метода
 
+    QTimer m_timer;
+    Match* m_currentMatch;
+    GameRules m_rules;
+    int m_team1Score;
+    int m_team2Score;
+};
 
 #endif // BASICSIMULATION_H

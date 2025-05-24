@@ -4,8 +4,8 @@
 #include <QObject>
 #include <QString>
 #include <QList>
+#include "C:\Users\drego\Documents\volleyball\model\player.h"
 
-// Forward declaration класса Player
 class Player;
 
 class Team : public QObject {
@@ -15,12 +15,20 @@ public:
 
     QString name() const;
     QList<Player*> players() const;
-
     void addPlayer(Player* player);
+    void calculateStats();
+
+    int attackLevel() const;
+    int defenseLevel() const;
+
+signals:
+    void statsChanged();
 
 private:
     QString m_name;
     QList<Player*> m_players;
+    int m_attackLevel;
+    int m_defenseLevel;
 };
 
 #endif // TEAM_H

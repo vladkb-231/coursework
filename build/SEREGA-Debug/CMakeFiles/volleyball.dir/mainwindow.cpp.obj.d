@@ -352,27 +352,53 @@ CMakeFiles/volleyball.dir/mainwindow.cpp.obj: \
  D:/QT/Tools/mingw_64_2/include/QtGui/qcursor.h \
  D:/QT/Tools/mingw_64_2/include/QtGui/qbitmap.h \
  D:/QT/Tools/mingw_64_2/include/QtWidgets/qtabwidget.h \
+ D:/QT/Tools/mingw_64_2/include/QtCore/QThread \
+ D:/QT/Tools/mingw_64_2/include/QtCore/qthread.h \
+ D:/QT/Tools/mingw_64_2/include/QtCore/qdeadlinetimer.h \
+ D:/QT/Tools/mingw_64_2/include/QtCore/qelapsedtimer.h \
+ D:/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/future \
+ D:/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/mutex \
+ D:/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/std_mutex.h \
+ D:/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/unique_lock.h \
+ D:/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/condition_variable \
+ D:/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/atomic_futex.h \
+ D:/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/std_thread.h \
  D:/QT/Tools/mingw_64_2/include/QtCore/QList \
  D:/QT/Tools/mingw_64_2/include/QtCore/qlist.h \
- C:\Users\drego\Documents\volleyball\model\player.h \
+ C:\Users\drego\Documents\volleyball\model\match.h \
  D:/QT/Tools/mingw_64_2/include/QtCore/QObject \
  D:/QT/Tools/mingw_64_2/include/QtCore/qobject.h \
- D:/QT/Tools/mingw_64_2/include/QtCore/QString \
- D:/QT/Tools/mingw_64_2/include/QtCore/qstring.h \
- C:\Users\drego\Documents\volleyball\model\team.h \
- C:\Users\drego\Documents\volleyball\model\team.h \
- C:\Users\drego\Documents\volleyball\model\tournament.h \
- C:\Users\drego\Documents\volleyball\model\match.h \
  D:/QT/Tools/mingw_64_2/include/QtCore/QMap \
  D:/QT/Tools/mingw_64_2/include/QtCore/qmap.h \
+ D:/QT/Tools/mingw_64_2/include/QtCore/QDateTime \
+ D:/QT/Tools/mingw_64_2/include/QtCore/qdatetime.h \
+ D:/QT/Tools/mingw_64_2/include/QtCore/qcalendar.h \
+ D:/QT/Tools/mingw_64_2/include/QtCore/qlocale.h \
+ D:/QT/Tools/mingw_64_2/include/QtCore/QString \
+ D:/QT/Tools/mingw_64_2/include/QtCore/qstring.h \
  C:\Users\drego\Documents\volleyball\model\player.h \
- C:\Users\drego\Documents\volleyball\model\tournamenttable.h \
  C:\Users\drego\Documents\volleyball\simulation\basicsimulation.h \
  D:/QT/Tools/mingw_64_2/include/QtCore/QTimer \
  D:/QT/Tools/mingw_64_2/include/QtCore/qtimer.h \
  D:/QT/Tools/mingw_64_2/include/QtCore/qbasictimer.h \
- C:\Users\drego\Documents\volleyball\model\match.h \
+ C:\Users\drego\Documents\volleyball\simulation\simulationstrategy.h \
+ C:\Users\drego\Documents\volleyball\model\team.h \
  C:\Users\drego\Documents\volleyball\model\gamerules.h \
+ C:\Users\drego\Documents\volleyball\model\tournament.h \
+ C:\Users\drego\Documents\volleyball\model\team.h \
+ C:\Users\drego\Documents\volleyball\model\match.h \
+ C:\Users\drego\Documents\volleyball\model\tournamenttable.h \
+ D:/QT/Tools/mingw_64_2/include/QtCore/QRandomGenerator \
+ D:/QT/Tools/mingw_64_2/include/QtCore/qrandom.h \
+ D:/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/random \
+ D:/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/random.h \
+ D:/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32/bits/opt_random.h \
+ D:/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/pmmintrin.h \
+ D:/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/emmintrin.h \
+ D:/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/xmmintrin.h \
+ D:/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/mmintrin.h \
+ D:/QT/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/bits/random.tcc \
+ C:\Users\drego\Documents\volleyball\model\tournamenttable.h \
  C:\Users\drego\Documents\volleyball\model\matchevent.h \
  C:/Users/drego/Documents/volleyball/build/SEREGA-Debug/volleyball_autogen/include/ui_mainwindow.h \
  D:/QT/Tools/mingw_64_2/include/QtCore/QVariant \
@@ -386,7 +412,6 @@ CMakeFiles/volleyball.dir/mainwindow.cpp.obj: \
  D:/QT/Tools/mingw_64_2/include/QtCore/qcoreapplication_platform.h \
  D:/QT/Tools/mingw_64_2/include/QtGui/qguiapplication.h \
  D:/QT/Tools/mingw_64_2/include/QtGui/qinputmethod.h \
- D:/QT/Tools/mingw_64_2/include/QtCore/qlocale.h \
  D:/QT/Tools/mingw_64_2/include/QtGui/qguiapplication_platform.h \
  D:/QT/Tools/mingw_64_2/include/QtWidgets/QHBoxLayout \
  D:/QT/Tools/mingw_64_2/include/QtWidgets/qboxlayout.h \
@@ -450,5 +475,4 @@ CMakeFiles/volleyball.dir/mainwindow.cpp.obj: \
  D:/QT/Tools/mingw_64_2/include/QtWidgets/QMessageBox \
  D:/QT/Tools/mingw_64_2/include/QtWidgets/qmessagebox.h \
  D:/QT/Tools/mingw_64_2/include/QtWidgets/qdialog.h \
- D:/QT/Tools/mingw_64_2/include/QtCore/QDebug \
- D:/QT/Tools/mingw_64_2/include/QtCore/qdebug.h
+ D:/QT/Tools/mingw_64_2/include/QtWidgets/QTableWidgetItem
