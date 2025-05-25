@@ -60,7 +60,6 @@ void MainWindow::on_createTeamButton_clicked() {
         return;
     }
 
-    // Проверка количества игроков
     if(m_currentPlayers.size() != 6) {
         QMessageBox::warning(
             this,
@@ -86,7 +85,6 @@ void MainWindow::on_createTeamButton_clicked() {
 }
 
 void MainWindow::on_createTournamentButton_clicked() {
-    // Добавить проверку состава команд
     for(Team* team : m_teams) {
 
         bool validTeams = true;
@@ -188,7 +186,6 @@ void MainWindow::onMatchFinished(Match* match) {
     updateTournamentTable();
     updateScheduleList();
 
-    // Отображение лучшего игрока
     Player* bestPlayer = match->getBestPlayer();
     if (bestPlayer) {
         QMessageBox::information(this,
@@ -256,7 +253,6 @@ void MainWindow::updatePlayersList()
         ui->playersListWidget->addItem(item);
     }
 
-    // Добавляем счетчик с цветовой индикацией
     QListWidgetItem* counter = new QListWidgetItem(
         QString("Игроков: %1/6 | Двойной клик для удаления").arg(m_currentPlayers.size())
         );
@@ -286,14 +282,12 @@ void MainWindow::updateTournamentTable()
     if (!m_tournament) return;
 
     TournamentTable* table = m_tournament->table();
-    QList<Team*> teams = m_tournament->teams(); // Все команды турнира
+    QList<Team*> teams = m_tournament->teams();
 
-    // Сортируем по убыванию очков с учетом отсутствующих значений
     std::sort(teams.begin(), teams.end(), [table](Team* a, Team* b) {
         return table->points().value(a, 0) > table->points().value(b, 0);
     });
 
-    // Заполняем таблицу
     for (Team* team : teams) {
         int row = ui->tournamentTableWidget->rowCount();
         ui->tournamentTableWidget->insertRow(row);
@@ -316,13 +310,11 @@ void MainWindow::startNextMatch() {
 
 void MainWindow::onPlayerDoubleClicked(const QModelIndex &index)
 {
-    // Удаляем только игроков, а не счетчик
     if (index.row() < m_currentPlayers.size()) {
         Player* player = m_currentPlayers.takeAt(index.row());
         delete player;
         updatePlayersList();
 
-        // Обновляем доступность кнопки создания команды
         ui->createTeamButton->setEnabled(m_currentPlayers.size() == 6);
     }
 }

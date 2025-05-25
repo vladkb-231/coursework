@@ -27,7 +27,6 @@ void TournamentTable::updateStats(Match* match) {
     Team* team1 = match->team1();
     Team* team2 = match->team2();
 
-    // Гарантируем наличие записей
     if (!m_points.contains(team1)) initializeTeams({team1});
     if (!m_points.contains(team2)) initializeTeams({team2});
 

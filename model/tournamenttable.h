@@ -13,7 +13,7 @@ class TournamentTable : public QObject {
 public:
     explicit TournamentTable(QObject* parent = nullptr);
 
-    void initializeTeams(const QList<Team*>& teams); // Добавленный метод
+    void initializeTeams(const QList<Team*>& teams);
     void updateStats(Match* match);
 
     QMap<Team*, int> points() const;

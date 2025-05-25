@@ -12,7 +12,7 @@ Tournament::Tournament(const QString& name, QObject* parent)
 void Tournament::addTeam(Team* team) {
     if (!m_teams.contains(team)) {
         m_teams.append(team);
-        m_table->initializeTeams(m_teams); // Важная строка!
+        m_table->initializeTeams(m_teams);
     }
 }
 
